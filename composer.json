@@ -1,0 +1,79 @@
+{
+    "name": "guanguans/laravel-toRawSql",
+    "keywords": [
+        "sql",
+        "mysql",
+        "debug",
+        "laravel"
+    ],
+    "description": "轻松容易的输出 SQL 语句。 - Easy output of SQL statements for laravel framework.",
+    "support": {
+        "issues": "https://github.com/guanguans/laravel-toRawSql/issues",
+        "source": "https://github.com/guanguans/laravel-toRawSql"
+    },
+    "type": "laravel",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "guanguans",
+            "email": "ityaozm@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^5.1"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.2",
+        "phpunit/phpunit": "~8.0",
+        "orchestra/testbench": "^3.7",
+        "brainmaestro/composer-git-hooks": "^2.7",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "Guanguans\\LaravelToRawSql\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Guanguans\\LaravelToRawSql\\SoarServiceProvider"
+            ]
+        },
+        "hooks": {
+            "pre-commit": [
+                "composer test",
+                "composer check-style"
+            ],
+            "pre-push": [
+                "composer test",
+                "composer check-style"
+            ]
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "cghooks update"
+        ],
+        "post-merge": "composer install",
+        "post-install-cmd": [
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "cghooks": "vendor/bin/cghooks",
+        "check-style": "php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi",
+        "fix-style": "php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
+        "test": "vendor/bin/phpunit --coverage-text --colors=always --verbose"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests.",
+        "check-style": "Run style checks (only dry run - no fixing!).",
+        "fix-style": "Run style checks and fix violations."
+    }
+}
