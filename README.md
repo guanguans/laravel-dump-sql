@@ -23,19 +23,18 @@ $ php artisan vendor:publish --provider="Guanguans\\LaravelRawSql\\ServiceProvid
 
 ## Usage
 
-### code
-
 ``` php
-// Model
-echo User::where('id', 1)->toRawSql();
-// DB
-echo DB::table('user')->where('id', 1)->toRawSql();
-```
+// Get sql statement.
+User::where('id', 1)->toRawSql();
+DB::table('user')->where('id', 1)->toRawSql();
 
-### output
+// Print SQL statements.
+User::where('id', 1)->dumpRawSql();
+DB::table('user')->where('id', 1)->toRawSql();
 
-``` sql
-select * from `users` where `id` = 1
+// Print SQL statements and exit.
+User::where('id', 1)->ddRawSql();
+DB::table('user')->where('id', 1)->toRawSql();
 ```
 
 ## Testing
