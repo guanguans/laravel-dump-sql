@@ -21,6 +21,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->registerToRawSqlMacro();
+        $this->registerDumpRawSqlMacro();
+        $this->registerDdRawSqlMacro();
     }
 
     /**
@@ -36,6 +38,34 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         EloquentBuilder::macro('toRawSql', function () {
             return ($this->getQuery()->toRawSql());
+        });
+    }
+
+    /**
+     * Register the `dumpRawSql` macro.
+     */
+    protected function registerDumpRawSqlMacro()
+    {
+        QueryBuilder::macro('dumpRawSql', function () {
+            dump($this->toRawSql());
+        });
+
+        EloquentBuilder::macro('dumpRawSql', function () {
+            return ($this->getQuery()->dumpRawSql());
+        });
+    }
+
+    /**
+     * Register the `ddRawSql` macro.
+     */
+    protected function registerDdRawSqlMacro()
+    {
+        QueryBuilder::macro('ddRawSql', function () {
+            dd($this->toRawSql());
+        });
+
+        EloquentBuilder::macro('ddRawSql', function () {
+            return ($this->getQuery()->ddRawSql());
         });
     }
 
