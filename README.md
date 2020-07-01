@@ -30,11 +30,11 @@ DB::table('user')->where('id', 1)->toRawSql();
 
 // Print SQL statements.
 User::where('id', 1)->dumpRawSql();
-DB::table('user')->where('id', 1)->toRawSql();
+DB::table('user')->where('id', 1)->dumpRawSql();
 
 // Print SQL statements and exit.
 User::where('id', 1)->ddRawSql();
-DB::table('user')->where('id', 1)->toRawSql();
+DB::table('user')->where('id', 1)->ddRawSql();
 ```
 
 ## Testing
