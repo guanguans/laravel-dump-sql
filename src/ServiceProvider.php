@@ -10,6 +10,9 @@
 
 namespace Guanguans\LaravelRawSql;
 
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
@@ -17,13 +20,21 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        \Illuminate\Database\Query\Builder::macro('toRawSql', function () {
+        $this->registerToRawSqlMacro();
+    }
+
+    /**
+     * Register the `toRawSql` macro.
+     */
+    protected function registerToRawSqlMacro()
+    {
+        QueryBuilder::macro('toRawSql', function () {
             return array_reduce($this->getBindings(), function ($sql, $binding) {
                 return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
             }, $this->toSql());
         });
 
-        \Illuminate\Database\Eloquent\Builder::macro('toRawSql', function () {
+        EloquentBuilder::macro('toRawSql', function () {
             return ($this->getQuery()->toRawSql());
         });
     }
