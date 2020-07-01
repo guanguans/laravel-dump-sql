@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the guanguans/laravel-toRawSql.
+ * This file is part of the guanguans/laravel-raw-sql.
  *
  * (c) guanguans <ityaozm@gmail.com>
  *
