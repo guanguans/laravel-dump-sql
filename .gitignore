@@ -5,3 +5,4 @@ composer.lock
 /coverage/
 .phpunit.result.cache
 tests.php
+.DS_Store
