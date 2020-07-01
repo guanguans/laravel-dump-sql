@@ -1,5 +1,5 @@
 {
-    "name": "guanguans/laravel-toRawSql",
+    "name": "guanguans/laravel-raw-sql",
     "keywords": [
         "sql",
         "mysql",
@@ -8,8 +8,8 @@
     ],
     "description": "轻松容易的输出 SQL 语句。 - Easy output of SQL statements for laravel framework.",
     "support": {
-        "issues": "https://github.com/guanguans/laravel-toRawSql/issues",
-        "source": "https://github.com/guanguans/laravel-toRawSql"
+        "issues": "https://github.com/guanguans/laravel-raw-sql/issues",
+        "source": "https://github.com/guanguans/laravel-raw-sql"
     },
     "type": "laravel",
     "license": "MIT",
@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Guanguans\\LaravelToRawSql\\": "src"
+            "Guanguans\\LaravelRawSql\\": "src"
         }
     },
     "autoload-dev": {
@@ -43,7 +43,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Guanguans\\LaravelToRawSql\\SoarServiceProvider"
+                "Guanguans\\LaravelRawSql\\SoarServiceProvider"
             ]
         },
         "hooks": {

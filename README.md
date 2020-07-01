@@ -1,8 +1,8 @@
-# laravel-toRawSql
+# laravel-raw-sql
 
 > Easy output of SQL statements for laravel framework.
 
-![CI](https://github.com/guanguans/laravel-toRawSql/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/guanguans/laravel-raw-sql/workflows/CI/badge.svg)
 
 ## Installing
 
@@ -13,7 +13,7 @@ $ composer require guanguans/laravel-toRawSql -v
 ### publish
 
 ```php
-$ php artisan vendor:publish --provider="Guanguans\\LaravelToRawSql\\ServiceProvider"
+$ php artisan vendor:publish --provider="Guanguans\\LaravelRawSql\\ServiceProvider"
 ```
 
 ## Usage

@@ -10,7 +10,7 @@
 
 namespace Tests;
 
-use Guanguans\LaravelToRawSql\ServiceProvider;
+use Guanguans\LaravelRawSql\ServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
