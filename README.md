@@ -2,12 +2,17 @@
 
 > Easy output of SQL statements for laravel framework.
 
+<p align="center"><img src="./docs/usage.png"></p>
+
 ![CI](https://github.com/guanguans/laravel-raw-sql/workflows/CI/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-raw-sql/v)](//packagist.org/packages/guanguans/laravel-raw-sql)
+[![Total Downloads](https://poser.pugx.org/guanguans/laravel-raw-sql/downloads)](//packagist.org/packages/guanguans/laravel-raw-sql)
+[![License](https://poser.pugx.org/guanguans/laravel-raw-sql/license)](//packagist.org/packages/guanguans/laravel-raw-sql)
 
 ## Installing
 
 ``` shell
-$ composer require guanguans/laravel-toRawSql -v
+$ composer require guanguans/laravel-raw-sql -v
 ```
 
 ### publish
@@ -21,7 +26,7 @@ $ php artisan vendor:publish --provider="Guanguans\\LaravelRawSql\\ServiceProvid
 ### code
 
 ``` php
-// model
+// Model
 echo User::where('id', 1)->toRawSql();
 // DB
 echo DB::table('user')->where('id', 1)->toRawSql();
@@ -31,6 +36,12 @@ echo DB::table('user')->where('id', 1)->toRawSql();
 
 ``` sql
 select * from `users` where `id` = 1
+```
+
+## Testing
+
+``` shell
+$ composer test
 ```
 
 ## License
