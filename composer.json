@@ -6,7 +6,7 @@
         "debug",
         "laravel"
     ],
-    "description": "轻松容易的输出 SQL 语句。 - Easy output of SQL statements for laravel framework.",
+    "description": "laravel 中轻松容易的输出 SQL 语句。 - Easy output of SQL statements for laravel framework.",
     "support": {
         "issues": "https://github.com/guanguans/laravel-raw-sql/issues",
         "source": "https://github.com/guanguans/laravel-raw-sql"
