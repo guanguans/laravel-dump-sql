@@ -15,11 +15,13 @@
 $ composer require guanguans/laravel-raw-sql -v
 ```
 
-### publish
+### Publish
 
 ```php
 $ php artisan vendor:publish --provider="Guanguans\\LaravelRawSql\\ServiceProvider"
 ```
+
+> Custom method name. `config/rawsql.php`
 
 ## Usage
 
