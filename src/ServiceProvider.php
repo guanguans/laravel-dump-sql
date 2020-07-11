@@ -10,8 +10,10 @@
 
 namespace Guanguans\LaravelRawSql;
 
+use Closure;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -20,53 +22,71 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        $this->registerToRawSqlMacro();
-        $this->registerDumpRawSqlMacro();
-        $this->registerDdRawSqlMacro();
-    }
-
-    /**
-     * Register the `toRawSql` macro.
-     */
-    protected function registerToRawSqlMacro()
-    {
-        QueryBuilder::macro('toRawSql', function () {
-            return array_reduce($this->getBindings(), function ($sql, $binding) {
-                return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
-            }, $this->toSql());
+        /**
+         * Register the `toRawSql` macro.
+         */
+        $this->registerBuilderMacro('toRawSql', function ($macro) {
+            QueryBuilder::macro($macro, function () {
+                return array_reduce($this->getBindings(), function ($sql, $binding) {
+                    return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
+                }, $this->toSql());
+            });
         });
 
-        EloquentBuilder::macro('toRawSql', function () {
-            return ($this->getQuery()->toRawSql());
-        });
-    }
-
-    /**
-     * Register the `dumpRawSql` macro.
-     */
-    protected function registerDumpRawSqlMacro()
-    {
-        QueryBuilder::macro('dumpRawSql', function () {
-            dump($this->toRawSql());
+        /**
+         * Register the `dumpRawSql` macro.
+         */
+        $this->registerBuilderMacro('dumpRawSql', function ($macro) {
+            QueryBuilder::macro($macro, function () {
+                dump($this->toRawSql());
+            });
         });
 
-        EloquentBuilder::macro('dumpRawSql', function () {
-            return ($this->getQuery()->dumpRawSql());
+        /**
+         * Register the `ddRawSql` macro.
+         */
+        $this->registerBuilderMacro('ddRawSql', function ($macro) {
+            QueryBuilder::macro($macro, function () {
+                dd($this->toRawSql());
+            });
         });
     }
 
     /**
-     * Register the `ddRawSql` macro.
+     * @param $macro
+     * @param  \Closure  $closure
+     * @return bool
+     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
      */
-    protected function registerDdRawSqlMacro()
+    protected function registerBuilderMacro($macro, Closure $closure)
     {
-        QueryBuilder::macro('ddRawSql', function () {
-            dd($this->toRawSql());
+        if (!is_string($macro)) {
+            throw new InvalidArgumentException('Macro name must be a string');
+        }
+
+        $closure($macro);
+
+        $this->registerEloquentBuilderMacro($macro);
+
+        return true;
+    }
+
+    /**
+     * @param $macro
+     * @return bool
+     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
+     */
+    protected function registerEloquentBuilderMacro($macro)
+    {
+        if (!is_string($macro)) {
+            throw new InvalidArgumentException('Macro name must be a string');
+        }
+
+        EloquentBuilder::macro($macro, function () use ($macro) {
+            return ($this->getQuery()->$macro());
         });
 
-        EloquentBuilder::macro('ddRawSql', function () {
-            return ($this->getQuery()->ddRawSql());
-        });
+        return true;
     }
 
     /**
