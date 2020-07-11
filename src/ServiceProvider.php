@@ -22,10 +22,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
+        $this->setupConfig();
+
         /**
          * Register the `toRawSql` macro.
          */
-        $this->registerBuilderMacro('toRawSql', function ($macro) {
+        $this->registerBuilderMacro(config('rawsql.to_raw_sql', 'toRawSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
                 return array_reduce($this->getBindings(), function ($sql, $binding) {
                     return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
@@ -36,18 +38,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /**
          * Register the `dumpRawSql` macro.
          */
-        $this->registerBuilderMacro('dumpRawSql', function ($macro) {
+        $this->registerBuilderMacro(config('rawsql.dump_raw_sql', 'dumpRawSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
-                dump($this->toRawSql());
+                dump($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
             });
         });
 
         /**
          * Register the `ddRawSql` macro.
          */
-        $this->registerBuilderMacro('ddRawSql', function ($macro) {
+        $this->registerBuilderMacro(config('rawsql.dd_raw_sql', 'ddRawSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
-                dd($this->toRawSql());
+                dd($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
             });
         });
     }
@@ -76,6 +78,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         if (!is_string($macro)) {
             throw new InvalidArgumentException('Macro name must be a string');
+        }
+
+        if (method_exists(app(QueryBuilder::class), $macro)) {
+            throw new InvalidArgumentException(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $macro));
         }
 
         $closure($macro);
