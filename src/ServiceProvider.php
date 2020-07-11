@@ -53,6 +53,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
+     * Setup the config.
+     */
+    protected function setupConfig()
+    {
+        $source = __DIR__.'/../config/rawsql.php';
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([$source => config_path('rawsql.php')], 'laravel-raw-sql');
+        }
+
+        $this->mergeConfigFrom($source, 'rawsql');
+    }
+
+    /**
      * @param $macro
      * @param  \Closure  $closure
      * @return bool
