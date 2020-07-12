@@ -63,7 +63,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $source = __DIR__.'/../config/dumpsql.php';
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('dumpsql.php')], 'laravel-raw-sql');
+            $this->publishes([$source => config_path('dumpsql.php')], 'laravel-dump-sql');
         }
 
         $this->mergeConfigFrom($source, 'dumpsql');
