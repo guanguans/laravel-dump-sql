@@ -21,10 +21,10 @@ return [
     /*
      * Print SQL statements.
      */
-    'dump_raw_sql' => 'dumpRawSql',
+    'dump_sql' => 'dumpSql',
 
     /*
      * Print SQL statements and exit.
      */
-    'dd_raw_sql' => 'ddRawSql',
+    'dd_sql' => 'ddSql',
 ];

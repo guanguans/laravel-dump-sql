@@ -19,6 +19,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
+     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
      */
     public function boot()
     {
@@ -36,18 +37,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         /**
-         * Register the `dumpRawSql` macro.
+         * Register the `dumpSql` macro.
          */
-        $this->registerBuilderMacro(config('rawsql.dump_raw_sql', 'dumpRawSql'), function ($macro) {
+        $this->registerBuilderMacro(config('rawsql.dump_sql', 'dumpSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
                 dump($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
             });
         });
 
         /**
-         * Register the `ddRawSql` macro.
+         * Register the `ddSql` macro.
          */
-        $this->registerBuilderMacro(config('rawsql.dd_raw_sql', 'ddRawSql'), function ($macro) {
+        $this->registerBuilderMacro(config('rawsql.dd_sql', 'ddSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
                 dd($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
             });
