@@ -1,27 +1,27 @@
-# laravel-raw-sql
+# laravel-dump-sql
 
 > Easy output of SQL statements for laravel framework.
 
 <p align="center"><img src="./docs/usage.png"></p>
 
-![CI](https://github.com/guanguans/laravel-raw-sql/workflows/CI/badge.svg)
-[![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-raw-sql/v)](//packagist.org/packages/guanguans/laravel-raw-sql)
-[![Total Downloads](https://poser.pugx.org/guanguans/laravel-raw-sql/downloads)](//packagist.org/packages/guanguans/laravel-raw-sql)
-[![License](https://poser.pugx.org/guanguans/laravel-raw-sql/license)](//packagist.org/packages/guanguans/laravel-raw-sql)
+![CI](https://github.com/guanguans/laravel-dump-sql/workflows/CI/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
+[![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
+[![License](https://poser.pugx.org/guanguans/laravel-dump-sql/license)](//packagist.org/packages/guanguans/laravel-dump-sql)
 
 ## Installing
 
 ``` shell
-$ composer require guanguans/laravel-raw-sql -v
+$ composer require guanguans/laravel-dump-sql -v
 ```
 
 ### Publish
 
 ```php
-$ php artisan vendor:publish --provider="Guanguans\\LaravelRawSql\\ServiceProvider"
+$ php artisan vendor:publish --provider="Guanguans\\LaravelDumpSql\\ServiceProvider"
 ```
 
-> Custom method name. `config/rawsql.php`
+> Custom method name. `config/dumpsql.php`
 
 ## Usage
 

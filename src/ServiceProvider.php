@@ -1,25 +1,25 @@
 <?php
 
 /*
- * This file is part of the guanguans/laravel-raw-sql.
+ * This file is part of the guanguans/laravel-dump-sql.
  *
  * (c) guanguans <ityaozm@gmail.com>
  *
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace Guanguans\LaravelRawSql;
+namespace Guanguans\LaravelDumpSql;
 
 use Closure;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException;
+use Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
+     * @throws \Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException
      */
     public function boot()
     {
@@ -28,7 +28,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /**
          * Register the `toRawSql` macro.
          */
-        $this->registerBuilderMacro(config('rawsql.to_raw_sql', 'toRawSql'), function ($macro) {
+        $this->registerBuilderMacro(config('dumpsql.to_raw_sql', 'toRawSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
                 return array_reduce($this->getBindings(), function ($sql, $binding) {
                     return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
@@ -39,18 +39,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /**
          * Register the `dumpSql` macro.
          */
-        $this->registerBuilderMacro(config('rawsql.dump_sql', 'dumpSql'), function ($macro) {
+        $this->registerBuilderMacro(config('dumpsql.dump_sql', 'dumpSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
-                dump($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
+                dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
             });
         });
 
         /**
          * Register the `ddSql` macro.
          */
-        $this->registerBuilderMacro(config('rawsql.dd_sql', 'ddSql'), function ($macro) {
+        $this->registerBuilderMacro(config('dumpsql.dd_sql', 'ddSql'), function ($macro) {
             QueryBuilder::macro($macro, function () {
-                dd($this->{config('rawsql.to_raw_sql', 'toRawSql')}());
+                dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
             });
         });
     }
@@ -60,20 +60,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function setupConfig()
     {
-        $source = __DIR__.'/../config/rawsql.php';
+        $source = __DIR__.'/../config/dumpsql.php';
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('rawsql.php')], 'laravel-raw-sql');
+            $this->publishes([$source => config_path('dumpsql.php')], 'laravel-raw-sql');
         }
 
-        $this->mergeConfigFrom($source, 'rawsql');
+        $this->mergeConfigFrom($source, 'dumpsql');
     }
 
     /**
      * @param $macro
      * @param  \Closure  $closure
      * @return bool
-     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
+     * @throws \Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException
      */
     protected function registerBuilderMacro($macro, Closure $closure)
     {
@@ -95,14 +95,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     /**
      * @param $macro
      * @return bool
-     * @throws \Guanguans\LaravelRawSql\Exceptions\InvalidArgumentException
      */
     protected function registerEloquentBuilderMacro($macro)
     {
-        if (!is_string($macro)) {
-            throw new InvalidArgumentException('Macro name must be a string');
-        }
-
         EloquentBuilder::macro($macro, function () use ($macro) {
             return ($this->getQuery()->$macro());
         });
