@@ -19,11 +19,10 @@ $ composer require guanguans/laravel-dump-sql -v
 
 ```php
 $ php artisan vendor:publish --provider="Guanguans\\LaravelDumpSql\\ServiceProvider"
+$ php artisan vendor:publish --tag=laravel-dump-sql
 ```
 
-> Custom method name. `config/dumpsql.php`
-
-## Usage
+## Usage (Custom method name. `config/dumpsql.php`)
 
 ``` php
 // Get sql statement.
