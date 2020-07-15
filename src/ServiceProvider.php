@@ -28,30 +28,24 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /**
          * Register the `toRawSql` macro.
          */
-        $this->registerBuilderMacro(config('dumpsql.to_raw_sql', 'toRawSql'), function ($macro) {
-            QueryBuilder::macro($macro, function () {
-                return array_reduce($this->getBindings(), function ($sql, $binding) {
-                    return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
-                }, $this->toSql());
-            });
+        $this->registerBuilderMacro(config('dumpsql.to_raw_sql', 'toRawSql'), function () {
+            return array_reduce($this->getBindings(), function ($sql, $binding) {
+                return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
+            }, $this->toSql());
         });
 
         /**
          * Register the `dumpSql` macro.
          */
-        $this->registerBuilderMacro(config('dumpsql.dump_sql', 'dumpSql'), function ($macro) {
-            QueryBuilder::macro($macro, function () {
-                dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
-            });
+        $this->registerBuilderMacro(config('dumpsql.dump_sql', 'dumpSql'), function () {
+            dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
         });
 
         /**
          * Register the `ddSql` macro.
          */
-        $this->registerBuilderMacro(config('dumpsql.dd_sql', 'ddSql'), function ($macro) {
-            QueryBuilder::macro($macro, function () {
-                dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
-            });
+        $this->registerBuilderMacro(config('dumpsql.dd_sql', 'ddSql'), function () {
+            dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
         });
     }
 
@@ -85,7 +79,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             throw new InvalidArgumentException(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $macro));
         }
 
-        $closure($macro);
+        QueryBuilder::macro($macro, $closure);
 
         $this->registerEloquentBuilderMacro($macro);
 
