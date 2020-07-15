@@ -108,6 +108,21 @@ class ServiceProviderTest extends TestCase
         });
     }
 
+    public function testRegisterBuilderMacroInvalidArgumentMethodException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Macro name must be a string');
+
+
+        $registerBuilderMacro = function ($macro, Closure $closure) {
+            return $this->registerBuilderMacro($macro, $closure);
+        };
+
+        $registerBuilderMacro->call($this->provider, ['mack_str'], function () {
+            return true;
+        });
+    }
+
     public function testSetupConfig()
     {
         $setupConfig = function () {
