@@ -20,9 +20,9 @@ namespace Illuminate\Database\Eloquent {
     }
 
     /**
-     * @method static Builder toRawSql()
-     * @method static Builder dumpSql()
-     * @method static Builder ddSql()
+     * @method Builder toRawSql()
+     * @method Builder dumpSql()
+     * @method Builder ddSql()
      */
     class Model
     {
