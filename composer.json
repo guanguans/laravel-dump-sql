@@ -8,7 +8,7 @@
         "debug",
         "laravel"
     ],
-    "description": "laravel 中轻松容易的输出 SQL 语句。 - Easy output of SQL statements for laravel framework.",
+    "description": "laravel 中轻松容易的输出完整的 SQL 语句。 - Easy output of complete SQL statements for laravel framework.",
     "support": {
         "issues": "https://github.com/guanguans/laravel-dump-sql/issues",
         "source": "https://github.com/guanguans/laravel-dump-sql"
