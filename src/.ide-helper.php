@@ -28,3 +28,16 @@ namespace Illuminate\Database\Eloquent {
     {
     }
 }
+
+namespace Illuminate\Support\Facades {
+
+    /**
+     * @method Builder toRawSql()
+     * @method Builder dumpSql()
+     * @method Builder ddSql()
+     */
+    class DB
+    {
+    }
+}
+
