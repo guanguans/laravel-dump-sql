@@ -32,9 +32,9 @@ namespace Illuminate\Database\Eloquent {
 namespace Illuminate\Support\Facades {
 
     /**
-     * @method Builder toRawSql()
-     * @method Builder dumpSql()
-     * @method Builder ddSql()
+     * @method \Illuminate\Database\Eloquent\Builder  toRawSql()
+     * @method \Illuminate\Database\Eloquent\Builder  dumpSql()
+     * @method \Illuminate\Database\Eloquent\Builder  ddSql()
      */
     class DB
     {
