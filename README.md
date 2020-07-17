@@ -4,7 +4,7 @@
 
 > Easy output of complete SQL statements for laravel framework.
 
-> The sql statement obtained by the query construction method tolar in laravel is not bound to the conditional parameters, similar to `select * fromuserswhereid= ?`, so I wrote an extension package laravel-dump-sql to get the complete sql statement.
+> The sql statement obtained by the query construction method tolar in laravel is not bound to the conditional parameters, similar to `select * from users where id= ?`, so I wrote an extension package laravel-dump-sql to get the complete sql statement.
 
 ![CI](https://github.com/guanguans/laravel-dump-sql/workflows/CI/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
