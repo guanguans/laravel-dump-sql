@@ -22,7 +22,7 @@ class FeatureTest extends TestCase
         parent::setUp();
     }
 
-    public function test_basic_features()
+    public function testBasicFeatures()
     {
         $this->assertTrue(true);
     }
