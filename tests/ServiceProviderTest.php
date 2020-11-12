@@ -11,8 +11,8 @@
 namespace Tests;
 
 use Closure;
-use InvalidArgumentException;
 use Guanguans\LaravelDumpSql\ServiceProvider;
+use InvalidArgumentException;
 
 class ServiceProviderTest extends TestCase
 {
@@ -98,7 +98,6 @@ class ServiceProviderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $macro));
 
-
         $registerBuilderMacro = function ($macro, Closure $closure) {
             return $this->registerBuilderMacro($macro, $closure);
         };
@@ -112,7 +111,6 @@ class ServiceProviderTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Macro name must be a string');
-
 
         $registerBuilderMacro = function ($macro, Closure $closure) {
             return $this->registerBuilderMacro($macro, $closure);

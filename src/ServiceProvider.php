@@ -11,21 +11,22 @@
 namespace Guanguans\LaravelDumpSql;
 
 use Closure;
-use InvalidArgumentException;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use InvalidArgumentException;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     * @throws \InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     public function boot()
     {
         $this->setupConfig();
 
-        /**
+        /*
          * Register the `toRawSql` macro.
          */
         $this->registerBuilderMacro(config('dumpsql.to_raw_sql', 'toRawSql'), function () {
@@ -34,14 +35,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             }, $this->toSql());
         });
 
-        /**
+        /*
          * Register the `dumpSql` macro.
          */
         $this->registerBuilderMacro(config('dumpsql.dump_sql', 'dumpSql'), function () {
             dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
         });
 
-        /**
+        /*
          * Register the `ddSql` macro.
          */
         $this->registerBuilderMacro(config('dumpsql.dd_sql', 'ddSql'), function () {
@@ -65,13 +66,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     /**
      * @param $macro
-     * @param  \Closure  $closure
+     *
      * @return bool
+     *
      * @throws InvalidArgumentException
      */
     protected function registerBuilderMacro($macro, Closure $closure)
     {
-        if (!is_string($macro)) {
+        if (! is_string($macro)) {
             throw new InvalidArgumentException('Macro name must be a string');
         }
 
@@ -88,12 +90,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     /**
      * @param $macro
+     *
      * @return bool
      */
     protected function registerEloquentBuilderMacro($macro)
     {
         EloquentBuilder::macro($macro, function () use ($macro) {
-            return ($this->getQuery()->$macro());
+            return $this->getQuery()->$macro();
         });
 
         return true;
