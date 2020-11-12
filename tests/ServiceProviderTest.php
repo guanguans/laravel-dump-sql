@@ -11,8 +11,8 @@
 namespace Tests;
 
 use Closure;
+use InvalidArgumentException;
 use Guanguans\LaravelDumpSql\ServiceProvider;
-use Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException;
 
 class ServiceProviderTest extends TestCase
 {

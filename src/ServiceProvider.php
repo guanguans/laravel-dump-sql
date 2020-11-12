@@ -11,15 +11,15 @@
 namespace Guanguans\LaravelDumpSql;
 
 use Closure;
+use InvalidArgumentException;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     * @throws \Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function boot()
     {
@@ -67,7 +67,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      * @param $macro
      * @param  \Closure  $closure
      * @return bool
-     * @throws \Guanguans\LaravelDumpSql\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function registerBuilderMacro($macro, Closure $closure)
     {
@@ -97,12 +97,5 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         return true;
-    }
-
-    /**
-     * Register the provider.
-     */
-    public function register()
-    {
     }
 }
