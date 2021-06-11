@@ -8,11 +8,10 @@
  * This source file is subject to the MIT license that is bundled.
  */
 
-/**
+/*
  * Custom method name.
  */
 return [
-
     /*
      * Get sql statement.
      */
