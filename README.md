@@ -31,15 +31,15 @@ $ php artisan vendor:publish --provider="Guanguans\\LaravelDumpSql\\ServiceProvi
 
 ``` php
 // Get sql statement.
-User::where('id', 1)->toRawSql();
+User::query()->where('id', 1)->toRawSql();
 DB::table('user')->where('id', 1)->toRawSql();
 
 // Print SQL statements.
-User::where('id', 1)->dumpSql();
+User::query()->where('id', 1)->dumpSql();
 DB::table('user')->where('id', 1)->dumpSql();
 
 // Print SQL statements and exit.
-User::where('id', 1)->ddSql();
+User::query()->where('id', 1)->ddSql();
 DB::table('user')->where('id', 1)->ddSql();
 ```
 
