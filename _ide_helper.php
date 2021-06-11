@@ -16,7 +16,7 @@ namespace {
     class Eloquent extends \Illuminate\Database\Eloquent\Model
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMacro()
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
          * @static
          */
         public function toRawSql()
@@ -25,7 +25,7 @@ namespace {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMacro()
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
          * @static
          */
         public function dumpSql()
@@ -34,7 +34,7 @@ namespace {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMacro()
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
          * @static
          */
         public function ddSql()

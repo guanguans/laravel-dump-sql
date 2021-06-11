@@ -35,26 +35,26 @@ class ServiceProviderTest extends TestCase
 
     public function testBoot()
     {
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerBuilderMacro->call($this->provider, config('dumpsql.to_raw_sql', 'toRawSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.to_raw_sql', 'toRawSql'), function () {
             return true;
         });
         $this->assertTrue($isRegister);
 
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerBuilderMacro->call($this->provider, config('dumpsql.dump_sql', 'dumpSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.dump_sql', 'dumpSql'), function () {
             return true;
         });
         $this->assertTrue($isRegister);
 
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerBuilderMacro->call($this->provider, config('dumpsql.dd_sql', 'ddSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.dd_sql', 'ddSql'), function () {
             return true;
         });
         $this->assertTrue($isRegister);
@@ -67,56 +67,56 @@ class ServiceProviderTest extends TestCase
         // $this->assertTrue(method_exists($this->app->make(QueryBuilder::class), 'ddSql'));
     }
 
-    public function testRegisterEloquentBuilderMacro()
+    public function testRegisterEloquentBuilderMethod()
     {
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
 
-        $isRegister = $registerBuilderMacro->call($this->provider, 'mack_str', function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'mack_str', function () {
             return true;
         });
 
         $this->assertTrue($isRegister);
     }
 
-    public function testRegisterBuilderMacro()
+    public function testRegisterDatabaseBuilderMethod()
     {
-        $registerEloquentBuilderMacro = function ($macro) {
-            return $this->registerEloquentBuilderMacro($macro);
+        $registerEloquentBuilderMethod = function ($methodName) {
+            return $this->registerEloquentBuilderMethod($methodName);
         };
 
-        $isRegister = $registerEloquentBuilderMacro->call($this->provider, 'mack_str');
+        $isRegister = $registerEloquentBuilderMethod->call($this->provider, 'mack_str');
 
         $this->assertTrue($isRegister);
     }
 
-    public function testRegisterBuilderMacroInvalidArgumentException()
+    public function testRegisterDatabaseBuilderMethodInvalidArgumentException()
     {
-        $macro = 'dd';
+        $methodName = 'dd';
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $macro));
+        $this->expectExceptionMessage(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $methodName));
 
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
 
-        $registerBuilderMacro->call($this->provider, $macro, function () {
+        $registerDatabaseBuilderMethod->call($this->provider, $methodName, function () {
             return true;
         });
     }
 
-    public function testRegisterBuilderMacroInvalidArgumentMethodException()
+    public function testRegisterDatabaseBuilderMethodInvalidArgumentMethodException()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Macro name must be a string');
 
-        $registerBuilderMacro = function ($macro, Closure $closure) {
-            return $this->registerBuilderMacro($macro, $closure);
+        $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
+            return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
 
-        $registerBuilderMacro->call($this->provider, ['mack_str'], function () {
+        $registerDatabaseBuilderMethod->call($this->provider, ['mack_str'], function () {
             return true;
         });
     }
