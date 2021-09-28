@@ -16,8 +16,7 @@ namespace {
     class Eloquent extends \Illuminate\Database\Eloquent\Model
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function toRawSql()
         {
@@ -25,8 +24,7 @@ namespace {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function dumpSql()
         {
@@ -34,8 +32,7 @@ namespace {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerEloquentBuilderMethod()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function ddSql()
         {
@@ -48,8 +45,7 @@ namespace Illuminate\Database\Query {
     class Builder
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::boot()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function toRawSql()
         {
@@ -57,8 +53,7 @@ namespace Illuminate\Database\Query {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::boot()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function dumpSql()
         {
@@ -66,12 +61,69 @@ namespace Illuminate\Database\Query {
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::boot()
-         * @static
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
          */
         public function ddSql()
         {
             return \Illuminate\Database\Query\Builder::ddSql();
+        }
+    }
+}
+
+namespace Illuminate\Database\Eloquent {
+    class Builder
+    {
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function toRawSql()
+        {
+            return \Illuminate\Database\Query\Builder::toRawSql();
+        }
+
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function dumpSql()
+        {
+            return \Illuminate\Database\Query\Builder::dumpSql();
+        }
+
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function ddSql()
+        {
+            return \Illuminate\Database\Query\Builder::ddSql();
+        }
+    }
+}
+
+namespace Illuminate\Database\Eloquent\Relations {
+    class Relation
+    {
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function toRawSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::toRawSql();
+        }
+
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function dumpSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::dumpSql();
+        }
+
+        /**
+         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         */
+        public function ddSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::ddSql();
         }
     }
 }
