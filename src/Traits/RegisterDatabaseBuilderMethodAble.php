@@ -12,6 +12,7 @@ namespace Guanguans\LaravelDumpSql\Traits;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use InvalidArgumentException;
 
@@ -49,6 +50,20 @@ trait RegisterDatabaseBuilderMethodAble
     private function registerEloquentBuilderMethod($methodName)
     {
         EloquentBuilder::macro($methodName, function () use ($methodName) {
+            return $this->getQuery()->$methodName();
+        });
+
+        return true;
+    }
+
+    /**
+     * @param string $methodName
+     *
+     * @return bool
+     */
+    private function registerEloquentRelationMethod($methodName)
+    {
+        Relation::macro($methodName, function () use ($methodName) {
             return $this->getQuery()->$methodName();
         });
 
