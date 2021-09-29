@@ -13,7 +13,6 @@ namespace Guanguans\LaravelDumpSql;
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
-use InvalidArgumentException;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -22,7 +21,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     /**
      * Perform post-registration booting of services.
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function boot()
     {
