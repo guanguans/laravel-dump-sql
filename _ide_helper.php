@@ -12,60 +12,39 @@ namespace {
     class DB extends \Illuminate\Support\Facades\DB
     {
     }
-
-    class Eloquent extends \Illuminate\Database\Eloquent\Model
-    {
-        /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
-         */
-        public function toRawSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::toRawSql();
-        }
-
-        /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
-         */
-        public function dumpSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::dumpSql();
-        }
-
-        /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
-         */
-        public function ddSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::ddSql();
-        }
-    }
 }
 
 namespace Illuminate\Database\Query {
     class Builder
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return string
          */
-        public function toRawSql()
+        public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::toRawSql();
+            return \Illuminate\Database\Query\Builder::toRawSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function dumpSql()
+        public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::dumpSql();
+            return \Illuminate\Database\Query\Builder::dumpSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function ddSql()
+        public function ddSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::ddSql();
+            return \Illuminate\Database\Query\Builder::ddSql($format = false);
         }
     }
 }
@@ -74,27 +53,33 @@ namespace Illuminate\Database\Eloquent {
     class Builder
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return string
          */
-        public function toRawSql()
+        public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::toRawSql();
+            return \Illuminate\Database\Query\Builder::toRawSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function dumpSql()
+        public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::dumpSql();
+            return \Illuminate\Database\Query\Builder::dumpSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function ddSql()
+        public function ddSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::ddSql();
+            return \Illuminate\Database\Query\Builder::ddSql($format = false);
         }
     }
 }
@@ -103,27 +88,33 @@ namespace Illuminate\Database\Eloquent\Relations {
     class Relation
     {
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return string
          */
-        public function toRawSql()
+        public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::toRawSql();
+            return \Illuminate\Database\Eloquent\Builder::toRawSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function dumpSql()
+        public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::dumpSql();
+            return \Illuminate\Database\Eloquent\Builder::dumpSql($format = false);
         }
 
         /**
-         * @see \Guanguans\LaravelDumpSql\ServiceProvider::registerDatabaseBuilderMethod()
+         * @param bool $format
+         *
+         * @return void
          */
-        public function ddSql()
+        public function ddSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::ddSql();
+            return \Illuminate\Database\Eloquent\Builder::ddSql($format = false);
         }
     }
 }
