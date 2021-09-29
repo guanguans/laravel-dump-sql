@@ -10,6 +10,8 @@
 
 namespace Guanguans\LaravelDumpSql;
 
+use Doctrine\SqlFormatter\NullHighlighter;
+use Doctrine\SqlFormatter\SqlFormatter;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use InvalidArgumentException;
 
@@ -29,24 +31,28 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /*
          * Register the `toRawSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.to_raw_sql', 'toRawSql'), function () {
-            return array_reduce($this->getBindings(), function ($sql, $binding) {
+        $this->registerDatabaseBuilderMethod(config('dumpsql.to_raw_sql', 'toRawSql'), function ($format = false) {
+            $sql = array_reduce($this->getBindings(), function ($sql, $binding) {
                 return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
             }, $this->toSql());
+
+            $format and $sql = (new SqlFormatter(new NullHighlighter()))->format($sql);
+
+            return $sql;
         });
 
         /*
          * Register the `dumpSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.dump_sql', 'dumpSql'), function () {
-            dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
+        $this->registerDatabaseBuilderMethod(config('dumpsql.dump_sql', 'dumpSql'), function ($format = false) {
+            dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}($format));
         });
 
         /*
          * Register the `ddSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.dd_sql', 'ddSql'), function () {
-            dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}());
+        $this->registerDatabaseBuilderMethod(config('dumpsql.dd_sql', 'ddSql'), function ($format = false) {
+            dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}($format));
         });
     }
 

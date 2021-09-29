@@ -23,7 +23,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "^5.1 || ^6.0 || ^7.0 || ^8.0"
+        "laravel/framework": "^5.1 || ^6.0 || ^7.0 || ^8.0",
+        "doctrine/sql-formatter": "^1.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
