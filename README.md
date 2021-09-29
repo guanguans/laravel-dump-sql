@@ -6,6 +6,18 @@
 
 > The sql statement obtained by the query construction method tolar in laravel is not bound to the conditional parameters, similar to `select * from users where id= ?`, so I wrote an extension package laravel-dump-sql to get the complete sql statement.
 
+```php
+User::query()->where('id', 1)->dd();
+```
+
+![](docs/dd.png)
+
+```php
+User::query()->where('id', 1)->ddSql();
+```
+
+![](docs/ddSql.png)
+
 ![CI](https://github.com/guanguans/laravel-dump-sql/workflows/CI/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
@@ -17,30 +29,39 @@
 
 ## Installing
 
-``` shell
+```shell
 $ composer require guanguans/laravel-dump-sql -v
 ```
 
 ### Publish provider
 
-```php
+```shell
 $ php artisan vendor:publish --provider="Guanguans\\LaravelDumpSql\\ServiceProvider"
 ```
 
 ## Usage
 
-``` php
+```php
 // Get sql statement.
 User::query()->where('id', 1)->toRawSql();
 DB::table('user')->where('id', 1)->toRawSql();
+// Get formatted sql statement.
+User::query()->where('id', 1)->toRawSql(true);
+DB::table('user')->where('id', 1)->toRawSql(true);
 
-// Print SQL statements.
+// Print sql statements.
 User::query()->where('id', 1)->dumpSql();
 DB::table('user')->where('id', 1)->dumpSql();
+// Print formatted sql statements.
+User::query()->where('id', 1)->dumpSql(true);
+DB::table('user')->where('id', 1)->dumpSql(true);
 
-// Print SQL statements and exit.
+// Print sql statements and exit.
 User::query()->where('id', 1)->ddSql();
 DB::table('user')->where('id', 1)->ddSql();
+// Print formatted sql statements and exit.
+User::query()->where('id', 1)->ddSql(true);
+DB::table('user')->where('id', 1)->ddSql(true);
 ```
 
 ### Custom method name
@@ -53,7 +74,7 @@ $ php artisan vendor:publish --tag="laravel-dump-sql"
 
 #### Custom method name in the file `config/dumpsql.php`
 
-``` php
+```php
 <?php
 
 return [
@@ -76,7 +97,7 @@ return [
 
 ## Testing
 
-``` shell
+```shell
 $ composer test
 ```
 
