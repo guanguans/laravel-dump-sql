@@ -31,10 +31,24 @@ User::query()->where('id', 1)->ddSql();
 $ composer require guanguans/laravel-dump-sql -v
 ```
 
-### Publish provider
+## Configuration
+
+### laravel
+
+#### Publish provider(laravel < 5.5)
 
 ```shell
 $ php artisan vendor:publish --provider="Guanguans\\LaravelDumpSql\\ServiceProvider"
+```
+
+### lumen
+
+#### Bootstrap file changes
+
+Add the following snippet to the bootstrap/app.php file under the `Register Service Providers` section as follows:
+
+```php
+$app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 ```
 
 ## Usage
