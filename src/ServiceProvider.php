@@ -27,6 +27,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->setupConfig();
 
+        // Support lumen.
+        $this->app->bindIf(\Illuminate\Database\ConnectionInterface::class, function ($app) {
+            return $app['db']->connection();
+        });
+
         /*
          * Register the `toRawSql` macro.
          */
