@@ -1,6 +1,6 @@
 # laravel-dump-sql
 
-![ci](https://github.com/guanguans/laravel-dump-sql/workflows/ci/badge.svg)
+[![ci](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml/badge.svg)](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![License](https://poser.pugx.org/guanguans/laravel-dump-sql/license)](//packagist.org/packages/guanguans/laravel-dump-sql)
