@@ -13,6 +13,9 @@ namespace Guanguans\LaravelDumpSql;
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Foundation\Application as LaravelApplication;
+use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -26,11 +29,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->setupConfig();
-
-        // Support lumen.
-        $this->app->bindIf(\Illuminate\Database\ConnectionInterface::class, function ($app) {
-            return $app['db']->connection();
-        });
 
         /*
          * Register the `toRawSql` macro.
@@ -65,10 +63,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function setupConfig()
     {
-        $source = __DIR__.'/../config/dumpsql.php';
+        $source = realpath($raw = __DIR__.'/../config/dumpsql.php') ?: $raw;
 
-        if ($this->app->runningInConsole()) {
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
             $this->publishes([$source => config_path('dumpsql.php')], 'laravel-dump-sql');
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('dumpsql');
+
+            $this->app->bindIf(ConnectionInterface::class, function ($app) {
+                return $app['db']->connection();
+            });
         }
 
         $this->mergeConfigFrom($source, 'dumpsql');
