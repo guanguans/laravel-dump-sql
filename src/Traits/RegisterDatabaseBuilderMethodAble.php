@@ -19,25 +19,29 @@ use InvalidArgumentException;
 trait RegisterDatabaseBuilderMethodAble
 {
     /**
-     * @param $method
+     * @param $methodName
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function registerDatabaseBuilderMethod($method, Closure $closure)
+    public function registerDatabaseBuilderMethod($methodName, Closure $closure)
     {
-        if (! is_string($method)) {
+        if (! is_string($methodName)) {
             throw new InvalidArgumentException('Macro name must be a string');
         }
 
-        if (method_exists(app(QueryBuilder::class), $method)) {
-            throw new InvalidArgumentException(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $method));
+        if (
+            method_exists(QueryBuilder::class, $methodName) ||
+            method_exists(EloquentBuilder::class, $methodName) ||
+            method_exists(Relation::class, $methodName)
+        ) {
+            throw new InvalidArgumentException(sprintf('`%s` or `%s` or `%s` already exists method.:%s', QueryBuilder::class, EloquentBuilder::class, Relation::class, $methodName));
         }
 
-        QueryBuilder::macro($method, $closure);
-
-        $this->registerEloquentBuilderMethod($method);
+        QueryBuilder::macro($methodName, $closure);
+        $this->registerEloquentBuilderMethod($methodName);
+        $this->registerEloquentRelationMethod($methodName);
 
         return true;
     }

@@ -96,7 +96,6 @@ class ServiceProviderTest extends TestCase
         $methodName = 'dd';
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf('`Illuminate\Database\Query\Builder` already exists method.:%s', $methodName));
 
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
