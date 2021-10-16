@@ -40,33 +40,11 @@ trait RegisterDatabaseBuilderMethodAble
         }
 
         QueryBuilder::macro($methodName, $closure);
-        $this->registerEloquentBuilderMethod($methodName);
-        $this->registerEloquentRelationMethod($methodName);
 
-        return true;
-    }
-
-    /**
-     * @param string $methodName
-     *
-     * @return bool
-     */
-    private function registerEloquentBuilderMethod($methodName)
-    {
         EloquentBuilder::macro($methodName, function () use ($methodName) {
             return $this->getQuery()->$methodName();
         });
 
-        return true;
-    }
-
-    /**
-     * @param string $methodName
-     *
-     * @return bool
-     */
-    private function registerEloquentRelationMethod($methodName)
-    {
         Relation::macro($methodName, function () use ($methodName) {
             return $this->getQuery()->$methodName();
         });

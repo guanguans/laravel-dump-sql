@@ -67,7 +67,7 @@ class ServiceProviderTest extends TestCase
         // $this->assertTrue(method_exists($this->app->make(QueryBuilder::class), 'ddSql'));
     }
 
-    public function testRegisterEloquentBuilderMethod()
+    public function testRegisterDatabaseBuilderMethod()
     {
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
@@ -76,17 +76,6 @@ class ServiceProviderTest extends TestCase
         $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'mack_str', function () {
             return true;
         });
-
-        $this->assertTrue($isRegister);
-    }
-
-    public function testRegisterDatabaseBuilderMethod()
-    {
-        $registerEloquentBuilderMethod = function ($methodName) {
-            return $this->registerEloquentBuilderMethod($methodName);
-        };
-
-        $isRegister = $registerEloquentBuilderMethod->call($this->provider, 'mack_str');
 
         $this->assertTrue($isRegister);
     }
