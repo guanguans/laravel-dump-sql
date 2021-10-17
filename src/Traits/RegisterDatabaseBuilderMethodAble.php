@@ -39,14 +39,20 @@ trait RegisterDatabaseBuilderMethodAble
             throw new InvalidArgumentException(sprintf('`%s` or `%s` or `%s` already exists method.:%s', QueryBuilder::class, EloquentBuilder::class, Relation::class, $methodName));
         }
 
+        $parameters = array_keys(
+            (new \ReflectionObject($closure))
+                ->getMethod('__invoke')
+                ->getParameters()
+        );
+
         QueryBuilder::macro($methodName, $closure);
 
-        EloquentBuilder::macro($methodName, function () use ($methodName) {
-            return $this->getQuery()->$methodName();
+        EloquentBuilder::macro($methodName, function (...$parameters) use ($methodName) {
+            return $this->getQuery()->$methodName(...$parameters);
         });
 
-        Relation::macro($methodName, function () use ($methodName) {
-            return $this->getQuery()->$methodName();
+        Relation::macro($methodName, function (...$parameters) use ($methodName) {
+            return $this->getQuery()->$methodName(...$parameters);
         });
 
         return true;
