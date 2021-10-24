@@ -29,12 +29,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        $this->setupConfig();
+        // $this->setupConfig();
 
         /*
          * Register the `toRawSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.to_raw_sql', 'toRawSql'), function ($format = false) {
+        $this->registerDatabaseBuilderMethod('toRawSql', function ($format = false) {
             $sql = array_reduce($this->getBindings(), function ($sql, $binding) {
                 return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
             }, $this->toSql());
@@ -47,15 +47,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /*
          * Register the `dumpSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.dump_sql', 'dumpSql'), function ($format = false) {
-            dump($this->{config('dumpsql.to_raw_sql', 'toRawSql')}($format));
+        $this->registerDatabaseBuilderMethod('dumpSql', function ($format = false) {
+            dump($this->{'toRawSql'}($format));
         });
 
         /*
          * Register the `ddSql` macro.
          */
-        $this->registerDatabaseBuilderMethod(config('dumpsql.dd_sql', 'ddSql'), function ($format = false) {
-            dd($this->{config('dumpsql.to_raw_sql', 'toRawSql')}($format));
+        $this->registerDatabaseBuilderMethod('ddSql', function ($format = false) {
+            dd($this->{'toRawSql'}($format));
         });
 
         /*

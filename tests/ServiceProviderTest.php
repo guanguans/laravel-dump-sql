@@ -38,7 +38,7 @@ class ServiceProviderTest extends TestCase
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.to_raw_sql', 'toRawSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'toRawSql', function () {
             return true;
         });
         $this->assertTrue($isRegister);
@@ -46,7 +46,7 @@ class ServiceProviderTest extends TestCase
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.dump_sql', 'dumpSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'dumpSql', function () {
             return true;
         });
         $this->assertTrue($isRegister);
@@ -54,7 +54,7 @@ class ServiceProviderTest extends TestCase
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
         };
-        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, config('dumpsql.dd_sql', 'ddSql'), function () {
+        $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'ddSql', function () {
             return true;
         });
         $this->assertTrue($isRegister);
