@@ -12,13 +12,10 @@ namespace Guanguans\LaravelDumpSql;
 
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
+use Guanguans\LaravelDumpSql\Handlers\ListenSqlHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use Illuminate\Database\ConnectionInterface;
-use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Application as LaravelApplication;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use InvalidArgumentException;
 use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -64,55 +61,33 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /*
          * Register the `listenSql` macro.
          */
-        $this->registerDatabaseBuilderMethod('listenSql', function ($target = 'dd', $isOutputedToLogging = true) {
-            if (! in_array($target, [null, 'dump', 'dd'])) {
-                throw new InvalidArgumentException('Invalid target argument.');
-            }
-
-            DB::listen(function (QueryExecuted $query) use ($target, $isOutputedToLogging) {
-                $sqlWithPlaceholders = str_replace(['%', '?', '%s%s'], ['%%', '%s', '?'], $query->sql);
-
-                $bindings = $query->connection->prepareBindings($query->bindings);
-                $pdo = $query->connection->getPdo();
-                $realSql = $sqlWithPlaceholders;
-
-                $seconds = $query->time / 1000;
-                if ($seconds < 0.001) {
-                    $duration = round($seconds * 1000000).'μs';
-                } elseif ($seconds < 1) {
-                    $duration = round($seconds * 1000, 2).'ms';
-                } else {
-                    $duration = round($seconds, 2).'s';
-                }
-
-                if (count($bindings) > 0) {
-                    $realSql = vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
-                }
-
-                $sqlInformation = sprintf(
-                    '[%s] [%s] %s | %s: %s',
-                    $query->connection->getDatabaseName(),
-                    $duration,
-                    $realSql,
-                    request()->method(),
-                    request()->getRequestUri()
-                );
-
-                switch ($target) {
-                    case null:
-                        break;
-                    case 'dump':
-                        dump($sqlInformation);
-                        break;
-                    case 'dd':
-                        dd($sqlInformation);
-                        break;
-                }
-
-                $isOutputedToLogging and Log::channel(config('logging.default'))->debug($sqlInformation);
+        $this->registerDatabaseBuilderMethod('listenSql', function ($target) {
+            return tap($this, function ($queryBuilder) use ($target) {
+                app()->call(ListenSqlHandler::class, [
+                    'target' => $target,
+                ]);
             });
+        });
 
-            return $this;
+        /*
+         * Register the `logListenSql` macro.
+         */
+        $this->registerDatabaseBuilderMethod('logListenSql', function () {
+            return $this->listenSql('log');
+        });
+
+        /*
+         * Register the `dumpListenSql` macro.
+         */
+        $this->registerDatabaseBuilderMethod('dumpListenSql', function () {
+            return $this->listenSql('dump');
+        });
+
+        /*
+         * Register the `ddListenSql` macro.
+         */
+        $this->registerDatabaseBuilderMethod('ddListenSql', function () {
+            return $this->listenSql('dd');
         });
     }
 
