@@ -24,7 +24,7 @@ namespace Illuminate\Database\Query {
          */
         public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::toRawSql($format = false);
+            return \Illuminate\Database\Query\Builder::toRawSql($format);
         }
 
         /**
@@ -34,7 +34,7 @@ namespace Illuminate\Database\Query {
          */
         public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::dumpSql($format = false);
+            return \Illuminate\Database\Query\Builder::dumpSql($format);
         }
 
         /**
@@ -44,7 +44,39 @@ namespace Illuminate\Database\Query {
          */
         public function ddSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::ddSql($format = false);
+            return \Illuminate\Database\Query\Builder::ddSql($format);
+        }
+
+        /**
+         * @return void
+         */
+        public function listenedSql(string $target)
+        {
+            return \Illuminate\Database\Query\Builder::listenedSql($target);
+        }
+
+        /**
+         * @return void
+         */
+        public function logListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::logListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function dumpListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::dumpListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function ddListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::ddListenedSql();
         }
     }
 }
@@ -59,7 +91,7 @@ namespace Illuminate\Database\Eloquent {
          */
         public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::toRawSql($format = false);
+            return \Illuminate\Database\Query\Builder::toRawSql($format);
         }
 
         /**
@@ -69,7 +101,7 @@ namespace Illuminate\Database\Eloquent {
          */
         public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::dumpSql($format = false);
+            return \Illuminate\Database\Query\Builder::dumpSql($format);
         }
 
         /**
@@ -79,7 +111,39 @@ namespace Illuminate\Database\Eloquent {
          */
         public function ddSql($format = false)
         {
-            return \Illuminate\Database\Query\Builder::ddSql($format = false);
+            return \Illuminate\Database\Query\Builder::ddSql($format);
+        }
+
+        /**
+         * @return void
+         */
+        public function listenedSql(string $target)
+        {
+            return \Illuminate\Database\Query\Builder::listenedSql($target);
+        }
+
+        /**
+         * @return void
+         */
+        public function logListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::logListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function dumpListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::dumpListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function ddListenedSql()
+        {
+            return \Illuminate\Database\Query\Builder::ddListenedSql();
         }
     }
 }
@@ -94,7 +158,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          */
         public function toRawSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::toRawSql($format = false);
+            return \Illuminate\Database\Eloquent\Builder::toRawSql($format);
         }
 
         /**
@@ -104,7 +168,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          */
         public function dumpSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::dumpSql($format = false);
+            return \Illuminate\Database\Eloquent\Builder::dumpSql($format);
         }
 
         /**
@@ -114,7 +178,39 @@ namespace Illuminate\Database\Eloquent\Relations {
          */
         public function ddSql($format = false)
         {
-            return \Illuminate\Database\Eloquent\Builder::ddSql($format = false);
+            return \Illuminate\Database\Eloquent\Builder::ddSql($format);
+        }
+
+        /**
+         * @return void
+         */
+        public function listenedSql(string $target)
+        {
+            return \Illuminate\Database\Eloquent\Builder::listenedSql($target);
+        }
+
+        /**
+         * @return void
+         */
+        public function logListenedSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::logListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function dumpListenedSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::dumpListenedSql();
+        }
+
+        /**
+         * @return void
+         */
+        public function ddListenedSql()
+        {
+            return \Illuminate\Database\Eloquent\Builder::ddListenedSql();
         }
     }
 }
