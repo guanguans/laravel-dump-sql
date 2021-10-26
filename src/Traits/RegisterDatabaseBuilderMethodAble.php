@@ -19,18 +19,10 @@ use InvalidArgumentException;
 trait RegisterDatabaseBuilderMethodAble
 {
     /**
-     * @param $methodName
-     *
-     * @return bool
-     *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException|\ReflectionException
      */
-    public function registerDatabaseBuilderMethod($methodName, Closure $closure)
+    public function registerDatabaseBuilderMethod(string $methodName, Closure $closure)
     {
-        if (! is_string($methodName)) {
-            throw new InvalidArgumentException('Macro name must be a string');
-        }
-
         if (
             method_exists(QueryBuilder::class, $methodName) ||
             method_exists(EloquentBuilder::class, $methodName) ||
@@ -54,7 +46,5 @@ trait RegisterDatabaseBuilderMethodAble
         Relation::macro($methodName, function (...$parameters) use ($methodName) {
             return $this->getQuery()->$methodName(...$parameters);
         });
-
-        return true;
     }
 }

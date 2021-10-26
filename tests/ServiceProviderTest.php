@@ -41,7 +41,7 @@ class ServiceProviderTest extends TestCase
         $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'toRawSql', function () {
             return true;
         });
-        $this->assertTrue($isRegister);
+        $this->assertNull($isRegister);
 
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
@@ -49,7 +49,7 @@ class ServiceProviderTest extends TestCase
         $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'dumpSql', function () {
             return true;
         });
-        $this->assertTrue($isRegister);
+        $this->assertNull($isRegister);
 
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
@@ -57,7 +57,7 @@ class ServiceProviderTest extends TestCase
         $isRegister = $registerDatabaseBuilderMethod->call($this->provider, 'ddSql', function () {
             return true;
         });
-        $this->assertTrue($isRegister);
+        $this->assertNull($isRegister);
 
         // $this->provider->boot();
         // $this->markTestIncomplete();
@@ -77,7 +77,7 @@ class ServiceProviderTest extends TestCase
             return true;
         });
 
-        $this->assertTrue($isRegister);
+        $this->assertNull($isRegister);
     }
 
     public function testRegisterDatabaseBuilderMethodInvalidArgumentException()
@@ -97,8 +97,7 @@ class ServiceProviderTest extends TestCase
 
     public function testRegisterDatabaseBuilderMethodInvalidArgumentMethodException()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Macro name must be a string');
+        $this->expectError();
 
         $registerDatabaseBuilderMethod = function ($methodName, Closure $closure) {
             return $this->registerDatabaseBuilderMethod($methodName, $closure);
