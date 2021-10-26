@@ -1,5 +1,7 @@
 # laravel-dump-sql
 
+![](docs/usage.png)
+
 [![ci](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml/badge.svg)](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
@@ -42,13 +44,6 @@ $app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 ## 使用
 
 安装配置完毕后数据库查询构造方法会新增以下几个方法：
-
-* [toRawSql() - 获取完整的 sql](toRawSql() - 获取完整的 sql)
-* [dumpSql() - 打印完整的 sql](dumpSql() - 打印完整的 sql)
-* [ddSql() - 打印完整的 sql 并且退出](ddSql() - 打印完整的 sql 并且退出)
-* [logListenedSql() - 记录被监听到的 sql](logListenedSql() - 记录被监听到的 sql)
-* [dumpListenedSql() - 打印被监听到的 sql](dumpListenedSql() - 打印被监听到的 sql)
-* [ddListenedSql() - 打印被监听到的 sql 并且退出](ddListenedSql() - 打印被监听到的 sql 并且退出)
 
 ### toRawSql() - 获取完整的 sql
 
@@ -120,6 +115,15 @@ User::query()->where('id', 2)->first();
 [Laravel] [39.97ms] select * from `xb_users` where `id` = '1' limit 1 | GET: /
 ```
 
-## License
+## 安全漏洞
 
-[MIT](LICENSE)
+请查看[我们的安全政策](../../security/policy)了解如何报告安全漏洞。
+
+## 贡献者
+
+* [guanguans](https://github.com/guanguans)
+* [所有贡献者](../../contributors)
+
+## 协议
+
+MIT 许可证（MIT）。有关更多信息，请参见[协议文件](LICENSE)。
