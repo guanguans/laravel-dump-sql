@@ -48,14 +48,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
          * Register the `dumpSql` macro.
          */
         $this->registerDatabaseBuilderMethod('dumpSql', function ($format = false) {
-            dump($this->{'toRawSql'}($format));
+            dump($this->toRawSql($format));
         });
 
         /*
          * Register the `ddSql` macro.
          */
         $this->registerDatabaseBuilderMethod('ddSql', function ($format = false) {
-            dd($this->{'toRawSql'}($format));
+            dd($this->toRawSql($format));
         });
 
         /*
