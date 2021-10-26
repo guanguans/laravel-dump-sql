@@ -12,7 +12,7 @@ namespace Guanguans\LaravelDumpSql;
 
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
-use Guanguans\LaravelDumpSql\Handlers\ListenSqlHandler;
+use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Foundation\Application as LaravelApplication;
@@ -59,35 +59,35 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         /*
-         * Register the `listenSql` macro.
+         * Register the `listenedSql` macro.
          */
-        $this->registerDatabaseBuilderMethod('listenSql', function ($target) {
+        $this->registerDatabaseBuilderMethod('listenedSql', function ($target) {
             return tap($this, function ($queryBuilder) use ($target) {
-                app()->call(ListenSqlHandler::class, [
+                app()->call(ListenedSqlHandler::class, [
                     'target' => $target,
                 ]);
             });
         });
 
         /*
-         * Register the `logListenSql` macro.
+         * Register the `logListenedSql` macro.
          */
-        $this->registerDatabaseBuilderMethod('logListenSql', function () {
-            return $this->listenSql('log');
+        $this->registerDatabaseBuilderMethod('logListenedSql', function () {
+            return $this->listenedSql('log');
         });
 
         /*
-         * Register the `dumpListenSql` macro.
+         * Register the `dumpListenedSql` macro.
          */
-        $this->registerDatabaseBuilderMethod('dumpListenSql', function () {
-            return $this->listenSql('dump');
+        $this->registerDatabaseBuilderMethod('dumpListenedSql', function () {
+            return $this->listenedSql('dump');
         });
 
         /*
-         * Register the `ddListenSql` macro.
+         * Register the `ddListenedSql` macro.
          */
-        $this->registerDatabaseBuilderMethod('ddListenSql', function () {
-            return $this->listenSql('dd');
+        $this->registerDatabaseBuilderMethod('ddListenedSql', function () {
+            return $this->listenedSql('dd');
         });
     }
 

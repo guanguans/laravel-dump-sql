@@ -18,7 +18,7 @@ use InvalidArgumentException;
 /**
  * This file is modified from `overtrue/laravel-query-logger`.
  */
-class ListenSqlHandler
+class ListenedSqlHandler
 {
     public function __invoke(string $target): void
     {
