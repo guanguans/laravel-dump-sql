@@ -50,7 +50,7 @@ namespace Illuminate\Database\Query {
         /**
          * @return void
          */
-        public function listenedSql(string $target)
+        public function listenedSql(string $target): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::listenedSql($target);
         }
@@ -58,7 +58,7 @@ namespace Illuminate\Database\Query {
         /**
          * @return void
          */
-        public function logListenedSql()
+        public function logListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::logListenedSql();
         }
@@ -66,7 +66,7 @@ namespace Illuminate\Database\Query {
         /**
          * @return void
          */
-        public function dumpListenedSql()
+        public function dumpListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::dumpListenedSql();
         }
@@ -74,7 +74,7 @@ namespace Illuminate\Database\Query {
         /**
          * @return void
          */
-        public function ddListenedSql()
+        public function ddListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::ddListenedSql();
         }
@@ -117,7 +117,7 @@ namespace Illuminate\Database\Eloquent {
         /**
          * @return void
          */
-        public function listenedSql(string $target)
+        public function listenedSql(string $target): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::listenedSql($target);
         }
@@ -125,7 +125,7 @@ namespace Illuminate\Database\Eloquent {
         /**
          * @return void
          */
-        public function logListenedSql()
+        public function logListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::logListenedSql();
         }
@@ -133,7 +133,7 @@ namespace Illuminate\Database\Eloquent {
         /**
          * @return void
          */
-        public function dumpListenedSql()
+        public function dumpListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::dumpListenedSql();
         }
@@ -141,7 +141,7 @@ namespace Illuminate\Database\Eloquent {
         /**
          * @return void
          */
-        public function ddListenedSql()
+        public function ddListenedSql(): \Illuminate\Database\Query\Builder
         {
             return \Illuminate\Database\Query\Builder::ddListenedSql();
         }
@@ -184,7 +184,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         /**
          * @return void
          */
-        public function listenedSql(string $target)
+        public function listenedSql(string $target): \Illuminate\Database\Eloquent\Builder
         {
             return \Illuminate\Database\Eloquent\Builder::listenedSql($target);
         }
@@ -192,7 +192,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         /**
          * @return void
          */
-        public function logListenedSql()
+        public function logListenedSql(): \Illuminate\Database\Eloquent\Builder
         {
             return \Illuminate\Database\Eloquent\Builder::logListenedSql();
         }
@@ -200,7 +200,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         /**
          * @return void
          */
-        public function dumpListenedSql()
+        public function dumpListenedSql(): \Illuminate\Database\Eloquent\Builder
         {
             return \Illuminate\Database\Eloquent\Builder::dumpListenedSql();
         }
@@ -208,7 +208,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         /**
          * @return void
          */
-        public function ddListenedSql()
+        public function ddListenedSql(): \Illuminate\Database\Eloquent\Builder
         {
             return \Illuminate\Database\Eloquent\Builder::ddListenedSql();
         }
