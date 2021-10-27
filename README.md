@@ -45,6 +45,13 @@ $app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 
 安装配置完毕后数据库查询构造方法会新增以下几个方法：
 
+* toRawSql() - 获取完整的 sql
+* dumpSql() - 打印完整的 sql
+* ddSql() - 打印完整的 sql 并且退出
+* logListenedSql() - 记录被监听到的 sql
+* dumpListenedSql() - 打印被监听到的 sql
+* ddListenedSql() - 打印被监听到的 sql 并且退出
+
 ### toRawSql() - 获取完整的 sql
 
 ```php
