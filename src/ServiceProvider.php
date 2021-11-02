@@ -10,10 +10,13 @@
 
 namespace Guanguans\LaravelDumpSql;
 
+use Guanguans\LaravelDumpSql\Commands\ListenSqlServerCommand;
 use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
+use Guanguans\LaravelDumpSql\Handlers\SetVarDumperHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Foundation\Application as LaravelApplication;
+use Illuminate\Support\Facades\App;
 use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -27,62 +30,51 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        // $this->setupConfig();
+        $this->setupConfig();
 
-        /*
-         * Register the `toRawSql` macro.
-         */
+        // Register the `toRawSql` macro.
         $this->registerDatabaseBuilderMethod('toRawSql', function () {
             return array_reduce($this->getBindings(), function ($sql, $binding) {
                 return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
             }, $this->toSql());
         });
 
-        /*
-         * Register the `dumpSql` macro.
-         */
+        // Register the `dumpSql` macro.
         $this->registerDatabaseBuilderMethod('dumpSql', function () {
             dump($this->toRawSql());
         });
 
-        /*
-         * Register the `ddSql` macro.
-         */
+        // Register the `ddSql` macro.
         $this->registerDatabaseBuilderMethod('ddSql', function () {
             dd($this->toRawSql());
         });
 
-        /*
-         * Register the `listenedSql` macro.
-         */
+        // Register the `listenedSql` macro.
         $this->registerDatabaseBuilderMethod('listenedSql', function ($target) {
             return tap($this, function ($queryBuilder) use ($target) {
-                app()->call(ListenedSqlHandler::class, [
+                App::call(ListenedSqlHandler::class, [
                     'target' => $target,
                 ]);
             });
         });
 
-        /*
-         * Register the `logListenedSql` macro.
-         */
+        // Register the `logListenedSql` macro.
         $this->registerDatabaseBuilderMethod('logListenedSql', function () {
             return $this->listenedSql('log');
         });
 
-        /*
-         * Register the `dumpListenedSql` macro.
-         */
+        // Register the `dumpListenedSql` macro.
         $this->registerDatabaseBuilderMethod('dumpListenedSql', function () {
             return $this->listenedSql('dump');
         });
 
-        /*
-         * Register the `ddListenedSql` macro.
-         */
+        // Register the `ddListenedSql` macro.
         $this->registerDatabaseBuilderMethod('ddListenedSql', function () {
             return $this->listenedSql('dd');
         });
+
+        // Set `VarDumper` Handler.
+        $this->app->call(SetVarDumperHandler::class);
     }
 
     /**
@@ -90,18 +82,30 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function setupConfig()
     {
-        $source = realpath($raw = __DIR__.'/../config/dumpsql.php') ?: $raw;
+        $source = realpath($raw = __DIR__.'/../config/dump-sql.php') ?: $raw;
 
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('dumpsql.php')], 'laravel-dump-sql');
+            $this->publishes([$source => config_path('dump-sql.php')], 'laravel-dump-sql');
         } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('dumpsql');
+            $this->app->configure('dump-sql');
 
             $this->app->bindIf(ConnectionInterface::class, function ($app) {
                 return $app['db']->connection();
             });
         }
 
-        $this->mergeConfigFrom($source, 'dumpsql');
+        $this->mergeConfigFrom($source, 'dump-sql');
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->setupConfig();
+
+        $this->commands(ListenSqlServerCommand::class);
     }
 }
