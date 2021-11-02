@@ -10,8 +10,6 @@
 
 namespace Guanguans\LaravelDumpSql;
 
-use Doctrine\SqlFormatter\NullHighlighter;
-use Doctrine\SqlFormatter\SqlFormatter;
 use Guanguans\LaravelDumpSql\Commands\ListenSqlServerCommand;
 use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
 use Guanguans\LaravelDumpSql\Handlers\SetVarDumperHandler;
@@ -35,24 +33,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->setupConfig();
 
         // Register the `toRawSql` macro.
-        $this->registerDatabaseBuilderMethod('toRawSql', function ($format = false) {
-            $sql = array_reduce($this->getBindings(), function ($sql, $binding) {
+        $this->registerDatabaseBuilderMethod('toRawSql', function () {
+            return array_reduce($this->getBindings(), function ($sql, $binding) {
                 return preg_replace('/\?/', is_numeric($binding) ? $binding : "'".$binding."'", $sql, 1);
             }, $this->toSql());
-
-            $format and $sql = (new SqlFormatter(new NullHighlighter()))->format($sql);
-
-            return $sql;
         });
 
         // Register the `dumpSql` macro.
-        $this->registerDatabaseBuilderMethod('dumpSql', function ($format = false) {
-            dump($this->toRawSql($format));
+        $this->registerDatabaseBuilderMethod('dumpSql', function () {
+            dump($this->toRawSql());
         });
 
         // Register the `ddSql` macro.
-        $this->registerDatabaseBuilderMethod('ddSql', function ($format = false) {
-            dd($this->toRawSql($format));
+        $this->registerDatabaseBuilderMethod('ddSql', function () {
+            dd($this->toRawSql());
         });
 
         // Register the `listenedSql` macro.
