@@ -10,6 +10,7 @@
 
 namespace Guanguans\LaravelDumpSql\Handlers;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +21,16 @@ use InvalidArgumentException;
  */
 class ListenedSqlHandler
 {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    protected $app;
+
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
     public function __invoke(string $target): void
     {
         if (! in_array($target, ['log', 'dump', 'dd'])) {
@@ -43,13 +54,13 @@ class ListenedSqlHandler
                 $query->connection->getDatabaseName(),
                 $duration,
                 $realSql,
-                request()->method(),
-                request()->getRequestUri()
+                $this->app['request']->method(),
+                $this->app['request']->getRequestUri()
             );
 
             switch ($target) {
                 case 'log':
-                    Log::channel(config('logging.default'))->debug($sqlInfo);
+                    Log::channel($this->app['config']->get('logging.default'))->debug($sqlInfo);
                     break;
                 case 'dump':
                     dump($sqlInfo);

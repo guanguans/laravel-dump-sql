@@ -26,7 +26,7 @@ class ServiceProviderTest extends TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('dumpsql', [
+        $app['config']->set('dump-sql', [
             'to_raw_sql' => 'toRawSql',
             'dump_sql' => 'dumpSql',
             'dd_sql' => 'ddSql',
