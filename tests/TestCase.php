@@ -10,24 +10,6 @@
 
 namespace Tests;
 
-use Guanguans\LaravelDumpSql\ServiceProvider;
-
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * Load package service provider.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app)
-    {
-        return [ServiceProvider::class];
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
 }
