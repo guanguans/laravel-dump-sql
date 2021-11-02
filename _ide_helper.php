@@ -18,33 +18,27 @@ namespace Illuminate\Database\Query {
     class Builder
     {
         /**
-         * @param bool $format
-         *
          * @return string
          */
-        public function toRawSql($format = false)
+        public function toRawSql()
         {
-            return \Illuminate\Database\Query\Builder::toRawSql($format);
+            return \Illuminate\Database\Query\Builder::toRawSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function dumpSql($format = false)
+        public function dumpSql()
         {
-            return \Illuminate\Database\Query\Builder::dumpSql($format);
+            return \Illuminate\Database\Query\Builder::dumpSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function ddSql($format = false)
+        public function ddSql()
         {
-            return \Illuminate\Database\Query\Builder::ddSql($format);
+            return \Illuminate\Database\Query\Builder::ddSql();
         }
 
         /**
@@ -85,33 +79,27 @@ namespace Illuminate\Database\Eloquent {
     class Builder
     {
         /**
-         * @param bool $format
-         *
          * @return string
          */
-        public function toRawSql($format = false)
+        public function toRawSql()
         {
-            return \Illuminate\Database\Query\Builder::toRawSql($format);
+            return \Illuminate\Database\Query\Builder::toRawSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function dumpSql($format = false)
+        public function dumpSql()
         {
-            return \Illuminate\Database\Query\Builder::dumpSql($format);
+            return \Illuminate\Database\Query\Builder::dumpSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function ddSql($format = false)
+        public function ddSql()
         {
-            return \Illuminate\Database\Query\Builder::ddSql($format);
+            return \Illuminate\Database\Query\Builder::ddSql();
         }
 
         /**
@@ -152,33 +140,27 @@ namespace Illuminate\Database\Eloquent\Relations {
     class Relation
     {
         /**
-         * @param bool $format
-         *
          * @return string
          */
-        public function toRawSql($format = false)
+        public function toRawSql()
         {
-            return \Illuminate\Database\Eloquent\Builder::toRawSql($format);
+            return \Illuminate\Database\Eloquent\Builder::toRawSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function dumpSql($format = false)
+        public function dumpSql()
         {
-            return \Illuminate\Database\Eloquent\Builder::dumpSql($format);
+            return \Illuminate\Database\Eloquent\Builder::dumpSql();
         }
 
         /**
-         * @param bool $format
-         *
          * @return void
          */
-        public function ddSql($format = false)
+        public function ddSql()
         {
-            return \Illuminate\Database\Eloquent\Builder::ddSql($format);
+            return \Illuminate\Database\Eloquent\Builder::ddSql();
         }
 
         /**
