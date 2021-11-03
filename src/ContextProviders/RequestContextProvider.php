@@ -8,7 +8,7 @@
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace Guanguans\LaravelDumpSql\ContextProvider;
+namespace Guanguans\LaravelDumpSql\ContextProviders;
 
 use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\Cloner\VarCloner;

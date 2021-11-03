@@ -10,7 +10,7 @@
 
 namespace Guanguans\LaravelDumpSql\Handlers;
 
-use Guanguans\LaravelDumpSql\ContextProvider\RequestContextProvider;
+use Guanguans\LaravelDumpSql\ContextProviders\RequestContextProvider;
 use Guanguans\LaravelDumpSql\Dumper;
 use Illuminate\Container\Container;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
