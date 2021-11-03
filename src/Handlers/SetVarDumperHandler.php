@@ -12,7 +12,7 @@ namespace Guanguans\LaravelDumpSql\Handlers;
 
 use Guanguans\LaravelDumpSql\ContextProvider\RequestContextProvider;
 use Guanguans\LaravelDumpSql\Dumper;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Container\Container;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
 use Symfony\Component\VarDumper\Server\Connection;
@@ -22,11 +22,11 @@ use Symfony\Component\VarDumper\VarDumper;
 class SetVarDumperHandler
 {
     /**
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Container\Container
      */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(Container $app)
     {
         $this->app = $app;
     }
@@ -48,14 +48,17 @@ class SetVarDumperHandler
             $this->app->make(Dumper::class, ['connection' => $connection])->dump($var);
         });
 
-        $this->app->call(ListenedSqlHandler::class, [
-            'target' => 'dump',
-        ]);
+        call_user_func($this->app->make(ListenedSqlHandler::class), 'dump');
     }
 
     protected function isCanWrited(Connection $connection)
     {
-        $data = (new VarCloner())->cloneVar('===================================================================================================');
+        $data = (new VarCloner())->cloneVar(<<<logo
+ +-+-+-+-+-+-+-+ +-+-+-+-+ +-+-+-+
+ |l|a|r|a|v|e|l| |d|u|m|p| |s|q|l|
+ +-+-+-+-+-+-+-+ +-+-+-+-+ +-+-+-+
+logo
+);
 
         return $connection->write($data);
     }

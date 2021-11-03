@@ -10,7 +10,7 @@
 
 namespace Guanguans\LaravelDumpSql\Handlers;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Container\Container;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -22,11 +22,11 @@ use InvalidArgumentException;
 class ListenedSqlHandler
 {
     /**
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Container\Container
      */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(Container $app)
     {
         $this->app = $app;
     }

@@ -52,9 +52,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         // Register the `listenedSql` macro.
         $this->registerDatabaseBuilderMethod('listenedSql', function ($target) {
             return tap($this, function ($queryBuilder) use ($target) {
-                App::call(ListenedSqlHandler::class, [
-                    'target' => $target,
-                ]);
+                call_user_func(App::make(ListenedSqlHandler::class), $target);
             });
         });
 
@@ -74,7 +72,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
 
         // Set `VarDumper` Handler.
-        $this->app->call(SetVarDumperHandler::class);
+        call_user_func($this->app->make(SetVarDumperHandler::class));
     }
 
     /**
