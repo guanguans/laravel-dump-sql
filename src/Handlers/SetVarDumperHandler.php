@@ -48,7 +48,7 @@ class SetVarDumperHandler
             $this->app->make(Dumper::class, ['connection' => $connection])->dump($var);
         });
 
-        call_user_func($this->app->make(ListenedSqlHandler::class), 'dump');
+        call_user_func($this->app->make(ListenedSqlHandler::class), 'server');
     }
 
     protected function isCanWrited(Connection $connection)

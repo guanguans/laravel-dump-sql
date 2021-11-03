@@ -33,7 +33,7 @@ class ListenedSqlHandler
 
     public function __invoke(string $target): void
     {
-        if (! in_array($target, ['log', 'dump', 'dd'])) {
+        if (! in_array($target, ['log', 'dump', 'dd', 'server'])) {
             throw new InvalidArgumentException('Invalid target argument.');
         }
 
@@ -49,7 +49,7 @@ class ListenedSqlHandler
                 $realSql = vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
             }
 
-            $sqlInfo = sprintf(
+            $sql = sprintf(
                 '[%s] [%s] %s | %s: %s',
                 $query->connection->getDatabaseName(),
                 $duration,
@@ -60,13 +60,21 @@ class ListenedSqlHandler
 
             switch ($target) {
                 case 'log':
-                    Log::channel($this->app['config']->get('logging.default'))->debug($sqlInfo);
+                    Log::channel($this->app['config']->get('logging.default'))->debug($sql);
                     break;
                 case 'dump':
-                    dump($sqlInfo);
+                    dump($sql);
                     break;
                 case 'dd':
-                    dd($sqlInfo);
+                    dd($sql);
+                    break;
+                case 'server':
+                    dump(sprintf(
+                        '[%s] [%s] %s',
+                        $query->connection->getDatabaseName(),
+                        $duration,
+                        $realSql,
+                    ));
                     break;
             }
         });
