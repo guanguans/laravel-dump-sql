@@ -13,6 +13,7 @@ namespace Guanguans\LaravelDumpSql\Handlers;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 use InvalidArgumentException;
 
 /**
@@ -43,8 +44,8 @@ class ListenedSqlHandler
                 $query->connection->getDatabaseName(),
                 $duration,
                 $realSql,
-                request()->method(),
-                request()->getRequestUri()
+                Request::method(),
+                Request::getRequestUri()
             );
 
             switch ($target) {

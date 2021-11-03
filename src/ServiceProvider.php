@@ -14,6 +14,7 @@ use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Foundation\Application as LaravelApplication;
+use Illuminate\Support\Facades\App;
 use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -57,9 +58,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
          */
         $this->registerDatabaseBuilderMethod('listenedSql', function ($target) {
             return tap($this, function ($queryBuilder) use ($target) {
-                app()->call(ListenedSqlHandler::class, [
-                    'target' => $target,
-                ]);
+                call_user_func(App::make(ListenedSqlHandler::class), $target);
             });
         });
 
