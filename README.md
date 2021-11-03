@@ -23,6 +23,11 @@ User::query()->where('id', 1)->ddSql(); // 新增方法 `ddSql` 的打印结果
 
 ![](docs/ddSql.png)
 
+## 功能
+
+* 添加获取 sql 语句的查询构建便捷方法(`toRawSql`、`dumpSql`、`ddSql`、`logListenedSql`、`dumpListenedSql`、`ddListenedSql`)
+* 添加监控 sql 语句的服务命令
+
 ## 环境要求
 
 * laravel || lumen >= 5.5
@@ -43,6 +48,16 @@ $app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 
 ## 使用
 
+### 监控 sql 语句的服务的使用
+
+```shell
+$ php artisan server:dump-sql
+```
+
+![](docs/dump-server.gif)
+
+### 获取 sql 语句的查询构建便捷方法的使用
+
 安装配置完毕后数据库查询构造方法会新增以下几个方法：
 
 * toRawSql() - 获取完整的 sql
@@ -52,7 +67,7 @@ $app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 * dumpListenedSql() - 打印被监听到的 sql
 * ddListenedSql() - 打印被监听到的 sql 并且退出
 
-### toRawSql() - 获取完整的 sql
+#### toRawSql() - 获取完整的 sql
 
 ```php
 $sql = User::query()->where('id', 1)->toRawSql();
@@ -63,7 +78,7 @@ dd($sql);
 "select * from `xb_users` where `id` = 1"
 ```
 
-### dumpSql() - 打印完整的 sql
+#### dumpSql() - 打印完整的 sql
 
 ```php
 User::query()->where('id', 1)->dumpSql();
@@ -75,7 +90,7 @@ User::query()->where('id', 2)->dumpSql();
 "select * from `xb_users` where `id` = 2"
 ```
 
-### ddSql() - 打印完整的 sql 并且退出
+#### ddSql() - 打印完整的 sql 并且退出
 
 ```php
 User::query()->where('id', 1)->ddSql();
@@ -86,7 +101,7 @@ User::query()->where('id', 2)->ddSql();
 "select * from `xb_users` where `id` = 1"
 ```
 
-### logListenedSql() - 记录被监听到的 sql
+#### logListenedSql() - 记录被监听到的 sql
 
 ```php
 User::query()->where('id', 1)->logListenedSql()->first();
@@ -99,7 +114,7 @@ User::query()->where('id', 2)->first();
 [Laravel] [39.93ms] select * from `xb_users` where `id` = '2' limit 1 | GET: /
 ```
 
-### dumpListenedSql() - 打印被监听到的 sql
+#### dumpListenedSql() - 打印被监听到的 sql
 
 ```php
 User::query()->where('id', 1)->dumpListenedSql()->first();
@@ -111,7 +126,7 @@ User::query()->where('id', 2)->first();
 [Laravel] [39.93ms] select * from `xb_users` where `id` = '2' limit 1 | GET: /
 ```
 
-### ddListenedSql() - 打印被监听到的 sql 并且退出
+#### ddListenedSql() - 打印被监听到的 sql 并且退出
 
 ```php
 User::query()->where('id', 1)->ddListenedSql()->first();
