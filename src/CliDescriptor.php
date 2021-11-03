@@ -53,7 +53,7 @@ class CliDescriptor implements DumpDescriptorInterface
 
         if ($this->lastIdentifier !== $lastIdentifier) {
             $io->newLine();
-            $io->text(date('[Y-m-d H:i:s] ', (int) $context['timestamp']).$section);
+            $io->writeln(sprintf('<options=bold>[%s] %s :</>', date('Y-m-d H:i:s', (int) $context['timestamp']), $section));
         }
 
         if (SetVarDumperHandler::CONNECTION_TAG === $data->getValue()) {
