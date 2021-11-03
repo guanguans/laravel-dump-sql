@@ -10,10 +10,10 @@
 
 namespace Guanguans\LaravelDumpSql\Commands;
 
+use Guanguans\LaravelDumpSql\CliDescriptor;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\VarDumper\Cloner\Data;
-use Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Server\DumpServer;
 

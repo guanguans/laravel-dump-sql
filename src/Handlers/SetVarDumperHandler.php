@@ -14,13 +14,14 @@ use Guanguans\LaravelDumpSql\ContextProviders\RequestContextProvider;
 use Guanguans\LaravelDumpSql\Dumper;
 use Illuminate\Container\Container;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
 use Symfony\Component\VarDumper\Server\Connection;
 use Symfony\Component\VarDumper\Server\DumpServer;
 use Symfony\Component\VarDumper\VarDumper;
 
 class SetVarDumperHandler
 {
+    public const CONNECTION_TAG = 'laravel-dump-sql';
+
     /**
      * @var \Illuminate\Container\Container
      */
@@ -37,7 +38,6 @@ class SetVarDumperHandler
 
         $connection = new Connection($host, [
             'request' => new RequestContextProvider($this->app['request']),
-            // 'source' => new SourceContextProvider('utf-8', base_path()),
         ]);
 
         if (! $this->isCanWrited($connection)) {
@@ -53,12 +53,7 @@ class SetVarDumperHandler
 
     protected function isCanWrited(Connection $connection)
     {
-        $data = (new VarCloner())->cloneVar(<<<logo
- +-+-+-+-+-+-+-+ +-+-+-+-+ +-+-+-+
- |l|a|r|a|v|e|l| |d|u|m|p| |s|q|l|
- +-+-+-+-+-+-+-+ +-+-+-+-+ +-+-+-+
-logo
-);
+        $data = (new VarCloner())->cloneVar(self::CONNECTION_TAG);
 
         return $connection->write($data);
     }
