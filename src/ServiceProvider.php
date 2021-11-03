@@ -10,7 +10,7 @@
 
 namespace Guanguans\LaravelDumpSql;
 
-use Guanguans\LaravelDumpSql\Commands\ListenSqlServerCommand;
+use Guanguans\LaravelDumpSql\Commands\DumpSqlServerCommand;
 use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
 use Guanguans\LaravelDumpSql\Handlers\SetVarDumperHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
@@ -104,6 +104,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->setupConfig();
 
-        $this->commands(ListenSqlServerCommand::class);
+        $this->commands(DumpSqlServerCommand::class);
     }
 }

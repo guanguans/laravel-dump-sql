@@ -20,21 +20,21 @@ use Symfony\Component\VarDumper\Server\DumpServer;
 /**
  * This file is modified from `beyondcode/laravel-dump-server`.
  */
-class ListenSqlServerCommand extends Command
+class DumpSqlServerCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $signature = 'listen-sql-server';
+    protected $signature = 'server:dump-sql';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Start the listen sql server to collect sql information.';
+    protected $description = 'Start the dump sql server to collect sql information.';
 
     /**
      * The Dump server.
@@ -67,7 +67,7 @@ class ListenSqlServerCommand extends Command
         $io = new SymfonyStyle($this->input, $this->output);
 
         $errorIo = $io->getErrorStyle();
-        $errorIo->title('Laravel Listen Sql Server');
+        $errorIo->title('Laravel Dump Sql Server');
 
         $this->server->start();
 
