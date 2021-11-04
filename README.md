@@ -42,6 +42,8 @@ $app->register(\Guanguans\LaravelDumpSql\ServiceProvider::class);
 $ php artisan server:dump-sql
 ```
 
+![](docs/dump-server.png)
+
 ### 获取 sql 语句的查询构建便捷方法的使用
 
 安装配置完毕后数据库查询构造方法会新增以下几个方法：
