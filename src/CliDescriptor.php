@@ -35,6 +35,10 @@ class CliDescriptor implements DumpDescriptorInterface
 
     public function describe(OutputInterface $output, Data $data, array $context, int $clientId): void
     {
+        if (SetVarDumperHandler::CONNECTION_FLAG === $data->getValue()) {
+            return;
+        }
+
         $io = $output instanceof SymfonyStyle ? $output : new SymfonyStyle(new ArrayInput([]), $output);
         $this->dumper->setColors($output->isDecorated());
 
@@ -54,10 +58,6 @@ class CliDescriptor implements DumpDescriptorInterface
         if ($this->lastIdentifier !== $lastIdentifier) {
             $io->newLine();
             $io->writeln(sprintf('<options=bold>[%s] %s :</>', date('Y-m-d H:i:s', (int) $context['timestamp']), $section));
-        }
-
-        if (SetVarDumperHandler::CONNECTION_TAG === $data->getValue()) {
-            return;
         }
 
         $this->dumper->dump($data);

@@ -20,7 +20,7 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class SetVarDumperHandler
 {
-    public const CONNECTION_TAG = 'laravel-dump-sql';
+    public const CONNECTION_FLAG = 'laravel-dump-sql';
 
     /**
      * @var \Illuminate\Container\Container
@@ -53,7 +53,7 @@ class SetVarDumperHandler
 
     protected function isCanWrited(Connection $connection)
     {
-        $data = (new VarCloner())->cloneVar(self::CONNECTION_TAG);
+        $data = (new VarCloner())->cloneVar(self::CONNECTION_FLAG);
 
         return $connection->write($data);
     }
