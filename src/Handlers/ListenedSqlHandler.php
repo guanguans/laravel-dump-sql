@@ -73,7 +73,7 @@ class ListenedSqlHandler
                         '[%s] [%s] %s',
                         $query->connection->getDatabaseName(),
                         $duration,
-                        $realSql,
+                        $realSql
                     ));
                     break;
             }
