@@ -49,17 +49,14 @@ class CliDescriptor implements DumpDescriptorInterface
         if (isset($context['request'])) {
             $request = $context['request'];
             $this->lastIdentifier = $request['identifier'];
-            $section = sprintf('%s %s', $request['method'], $request['uri']);
-        } elseif (isset($context['cli'])) {
-            $this->lastIdentifier = $context['cli']['identifier'];
-            $section = '$ '.$context['cli']['command_line'];
+            $section = sprintf('[%s] [%s] [%s]', date('Y-m-d H:i:s', (int) $context['timestamp']), $request['method'], $request['uri']);
         }
 
         if ($this->lastIdentifier !== $lastIdentifier) {
-            $io->newLine();
-            $io->writeln(sprintf('<options=bold>[%s] %s :</>', date('Y-m-d H:i:s', (int) $context['timestamp']), $section));
+            $io->success($section);
         }
 
         $this->dumper->dump($data);
+        $io->newLine();
     }
 }
