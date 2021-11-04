@@ -10,17 +10,17 @@
 
 namespace Guanguans\LaravelDumpSql\Handlers;
 
+use Guanguans\LaravelDumpSql\Traits\FetchesStackTrace;
 use Illuminate\Container\Container;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 
-/**
- * This file is modified from `overtrue/laravel-query-logger`.
- */
 class ListenedSqlHandler
 {
+    use FetchesStackTrace;
+
     /**
      * @var \Illuminate\Container\Container
      */
@@ -37,62 +37,78 @@ class ListenedSqlHandler
             throw new InvalidArgumentException('Invalid target argument.');
         }
 
-        DB::listen(function (QueryExecuted $query) use ($target) {
-            $sqlWithPlaceholders = str_replace(['%', '?', '%s%s'], ['%%', '%s', '?'], $query->sql);
+        DB::listen(function (QueryExecuted $queryExecutedEvent) use ($target) {
+            $stackTrace = $this->getCallerFromStackTrace();
 
-            $bindings = $query->connection->prepareBindings($query->bindings);
-            $pdo = $query->connection->getPdo();
-            $realSql = $sqlWithPlaceholders;
-            $duration = $this->formatDuration($query->time / 1000);
-
-            if (count($bindings) > 0) {
-                $realSql = vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
-            }
-
-            $sql = sprintf(
-                '[%s] [%s] %s | %s: %s',
-                $query->connection->getDatabaseName(),
-                $duration,
-                $realSql,
-                $this->app['request']->method(),
-                $this->app['request']->getRequestUri()
-            );
+            $formatSql = $this->formatSqlInfo([
+                'connection' => $queryExecutedEvent->connectionName,
+                'file' => $stackTrace['file'],
+                'line' => $stackTrace['line'],
+                'time' => $this->formatQueryExecutedTime($queryExecutedEvent->time / 1000),
+                'sql' => $this->getRealSql($queryExecutedEvent),
+            ]);
 
             switch ($target) {
                 case 'log':
-                    Log::channel($this->app['config']->get('logging.default'))->debug($sql);
+                    Log::channel($this->app['config']->get('logging.default'))->debug($formatSql);
                     break;
                 case 'dump':
-                    dump($sql);
+                    dump($formatSql);
                     break;
                 case 'dd':
-                    dd($sql);
+                    dd($formatSql);
                     break;
                 case 'server':
-                    dump(sprintf(
-                        '[%s] [%s] %s',
-                        $query->connection->getDatabaseName(),
-                        $duration,
-                        $realSql
-                    ));
+                    dump($formatSql);
                     break;
             }
         });
     }
 
     /**
-     * @param float $seconds
+     * @return string
+     */
+    protected function getRealSql(QueryExecuted $queryExecutedEvent)
+    {
+        $sqlWithPlaceholders = str_replace(['%', '?', '%s%s'], ['%%', '%s', '?'], $queryExecutedEvent->sql);
+
+        $bindings = $queryExecutedEvent->connection->prepareBindings($queryExecutedEvent->bindings);
+        if (0 === count($bindings)) {
+            return $sqlWithPlaceholders;
+        }
+
+        $pdo = $queryExecutedEvent->connection->getPdo();
+
+        return vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
+    }
+
+    /**
+     * @param $seconds
      *
      * @return string
      */
-    private function formatDuration($seconds)
+    protected function formatQueryExecutedTime($seconds)
     {
         if ($seconds < 0.001) {
             return round($seconds * 1000000).'μs';
-        } elseif ($seconds < 1) {
+        }
+
+        if ($seconds < 1) {
             return round($seconds * 1000, 2).'ms';
         }
 
         return round($seconds, 2).'s';
+    }
+
+    /**
+     * @return string
+     */
+    protected function formatSqlInfo(array $sqlInfo)
+    {
+        $formatSql = array_reduces($sqlInfo, function ($carry, $val, $name) {
+            return $carry.sprintf('[%s: %s] ', $name, $val);
+        }, '');
+
+        return trim($formatSql);
     }
 }

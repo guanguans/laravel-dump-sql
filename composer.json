@@ -43,7 +43,10 @@
     "autoload": {
         "psr-4": {
             "Guanguans\\LaravelDumpSql\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
