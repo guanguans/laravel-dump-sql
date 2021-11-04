@@ -33,7 +33,7 @@ class ListenedSqlHandler
 
     public function __invoke(string $target): void
     {
-        if (! in_array($target, ['log', 'dump', 'dd', 'server'])) {
+        if (! in_array($target, ['log', 'dump', 'dd'])) {
             throw new InvalidArgumentException('Invalid target argument.');
         }
 
@@ -57,9 +57,6 @@ class ListenedSqlHandler
                     break;
                 case 'dd':
                     dd($formatSql);
-                    break;
-                case 'server':
-                    dump($formatSql);
                     break;
             }
         });

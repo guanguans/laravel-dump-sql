@@ -11,12 +11,10 @@
 namespace Guanguans\LaravelDumpSql;
 
 use Guanguans\LaravelDumpSql\Commands\DumpSqlServerCommand;
-use Guanguans\LaravelDumpSql\Handlers\ListenedSqlHandler;
 use Guanguans\LaravelDumpSql\Handlers\SetVarDumperHandler;
 use Guanguans\LaravelDumpSql\Traits\RegisterDatabaseBuilderMethodAble;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Foundation\Application as LaravelApplication;
-use Illuminate\Support\Facades\App;
 use Laravel\Lumen\Application as LumenApplication;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -52,7 +50,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         // Register the `listenedSql` macro.
         $this->registerDatabaseBuilderMethod('listenedSql', function ($target) {
             return tap($this, function ($queryBuilder) use ($target) {
-                call_user_func(App::make(ListenedSqlHandler::class), $target);
+                enable_listen_sql($target);
             });
         });
 
