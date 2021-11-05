@@ -34,7 +34,12 @@ if (! function_exists('enable_listen_sql')) {
      */
     function enable_listen_sql($target)
     {
-        return call_user_func(app(ListenedSqlHandler::class), $target);
+        return call_user_func(
+            tap(app(ListenedSqlHandler::class), function (ListenedSqlHandler $listenedSqlHandler) {
+                $listenedSqlHandler->enable();
+            }),
+            $target
+        );
     }
 }
 
@@ -65,5 +70,12 @@ if (! function_exists('enable_dd_listened_sql')) {
     function enable_dd_listened_sql()
     {
         return enable_listen_sql('dd');
+    }
+}
+
+if (! function_exists('disable_listened_sql')) {
+    function disable_listened_sql()
+    {
+        app(ListenedSqlHandler::class)->disable();
     }
 }

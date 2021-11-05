@@ -22,6 +22,11 @@ class ListenedSqlHandler
     use FetchesStackTrace;
 
     /**
+     * @var bool
+     */
+    protected $enabled = false;
+
+    /**
      * @var \Illuminate\Container\Container
      */
     protected $app;
@@ -38,6 +43,10 @@ class ListenedSqlHandler
         }
 
         DB::listen(function (QueryExecuted $queryExecutedEvent) use ($target) {
+            if (! $this->enabled()) {
+                return;
+            }
+
             $stackTrace = $this->getCallerFromStackTrace();
 
             $formatSql = $this->formatSqlInfo([
@@ -60,6 +69,25 @@ class ListenedSqlHandler
                     break;
             }
         });
+    }
+
+    public function enabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function enable(): self
+    {
+        $this->enabled = true;
+
+        return $this;
+    }
+
+    public function disable(): self
+    {
+        $this->enabled = false;
+
+        return $this;
     }
 
     /**
