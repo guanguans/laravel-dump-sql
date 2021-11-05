@@ -35,7 +35,7 @@ class CliDescriptor implements DumpDescriptorInterface
 
     public function describe(OutputInterface $output, Data $data, array $context, int $clientId): void
     {
-        if (SetVarDumperHandler::CONNECTION_FLAG === $data->getValue()) {
+        if ($this->shouldntDescribe($data)) {
             return;
         }
 
@@ -58,5 +58,15 @@ class CliDescriptor implements DumpDescriptorInterface
 
         $this->dumper->dump($data);
         $io->newLine();
+    }
+
+    protected function shouldntDescribe(Data $data): bool
+    {
+        return SetVarDumperHandler::CONNECTION_FLAG === $data->getValue();
+    }
+
+    protected function shouldDescribe(Data $data): bool
+    {
+        return ! $this->shouldntDescribe($data);
     }
 }

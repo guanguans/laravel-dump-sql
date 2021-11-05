@@ -40,7 +40,7 @@ class SetVarDumperHandler
             'request' => new RequestContextProvider($this->app['request']),
         ]);
 
-        if (! $this->isCanWrited($connection)) {
+        if (! $this->canWrited($connection)) {
             return;
         }
 
@@ -51,7 +51,7 @@ class SetVarDumperHandler
         enable_dump_listened_sql();
     }
 
-    protected function isCanWrited(Connection $connection)
+    protected function canWrited(Connection $connection)
     {
         $data = (new VarCloner())->cloneVar(self::CONNECTION_FLAG);
 
