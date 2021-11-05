@@ -53,7 +53,7 @@ class ListenedSqlHandler
                 'connection' => $queryExecutedEvent->connectionName,
                 'file' => $stackTrace['file'],
                 'line' => $stackTrace['line'],
-                'time' => $this->formatQueryExecutedTime($queryExecutedEvent->time / 1000),
+                'time' => $this->formatQueryExecutedTime($queryExecutedEvent->time),
                 'sql' => $this->getRealSql($queryExecutedEvent),
             ]);
 
@@ -108,21 +108,21 @@ class ListenedSqlHandler
     }
 
     /**
-     * @param $seconds
+     * @param $milliseconds
      *
      * @return string
      */
-    protected function formatQueryExecutedTime($seconds)
+    protected function formatQueryExecutedTime($milliseconds)
     {
-        if ($seconds < 0.001) {
-            return round($seconds * 1000000).'μs';
+        if ($milliseconds < 1) {
+            return round($milliseconds * 1000).'μs';
         }
 
-        if ($seconds < 1) {
-            return round($seconds * 1000, 2).'ms';
+        if ($milliseconds < 1000) {
+            return round($milliseconds, 2).'ms';
         }
 
-        return round($seconds, 2).'s';
+        return round($milliseconds / 1000, 2).'s';
     }
 
     /**
