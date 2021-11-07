@@ -8,12 +8,11 @@
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace Tests;
+namespace Guanguans\LaravelDumpSqlTests\TestClasses\Models;
 
-class ServiceProviderTest extends TestCase
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
 {
-    public function testTrue()
-    {
-        $this->assertTrue(true);
-    }
+    protected $table = 'users';
 }
