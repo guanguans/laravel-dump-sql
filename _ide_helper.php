@@ -15,184 +15,59 @@ namespace {
 }
 
 namespace Illuminate\Database\Query {
+    /**
+     * @method string toRawSql()
+     * @method void   dumpSql()
+     * @method void   ddSql()
+     * @method $this  listenedSql(string $target)
+     * @method $this  logListenedSql()
+     * @method $this  dumpListenedSql()
+     * @method $this  ddListenedSql()
+     *
+     * @see \Guanguans\LaravelDumpSql\ServiceProvider
+     * @see \Illuminate\Database\Query\Builder
+     */
     class Builder
     {
-        /**
-         * @return string
-         */
-        public function toRawSql()
-        {
-            return \Illuminate\Database\Query\Builder::toRawSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpSql()
-        {
-            return \Illuminate\Database\Query\Builder::dumpSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddSql()
-        {
-            return \Illuminate\Database\Query\Builder::ddSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function listenedSql(string $target): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::listenedSql($target);
-        }
-
-        /**
-         * @return void
-         */
-        public function logListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::logListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::dumpListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::ddListenedSql();
-        }
     }
 }
 
 namespace Illuminate\Database\Eloquent {
+    /**
+     * @method string toRawSql()
+     * @method void   dumpSql()
+     * @method void   ddSql()
+     * @method $this  listenedSql(string $target)
+     * @method $this  logListenedSql()
+     * @method $this  dumpListenedSql()
+     * @method $this  ddListenedSql()
+     *
+     * @mixin \Illuminate\Database\Query\Builder
+     *
+     * @see \Guanguans\LaravelDumpSql\ServiceProvider
+     * @see \Illuminate\Database\Eloquent\Builder
+     */
     class Builder
     {
-        /**
-         * @return string
-         */
-        public function toRawSql()
-        {
-            return \Illuminate\Database\Query\Builder::toRawSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpSql()
-        {
-            return \Illuminate\Database\Query\Builder::dumpSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddSql()
-        {
-            return \Illuminate\Database\Query\Builder::ddSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function listenedSql(string $target): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::listenedSql($target);
-        }
-
-        /**
-         * @return void
-         */
-        public function logListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::logListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::dumpListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddListenedSql(): \Illuminate\Database\Query\Builder
-        {
-            return \Illuminate\Database\Query\Builder::ddListenedSql();
-        }
     }
 }
 
 namespace Illuminate\Database\Eloquent\Relations {
+    /**
+     * @method string toRawSql()
+     * @method void   dumpSql()
+     * @method void   ddSql()
+     * @method $this  listenedSql(string $target)
+     * @method $this  logListenedSql()
+     * @method $this  dumpListenedSql()
+     * @method $this  ddListenedSql()
+     *
+     * @mixin \Illuminate\Database\Eloquent\Builder
+     *
+     * @see \Guanguans\LaravelDumpSql\ServiceProvider
+     * @see \Illuminate\Database\Eloquent\Relations\Relation
+     */
     class Relation
     {
-        /**
-         * @return string
-         */
-        public function toRawSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::toRawSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::dumpSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddSql()
-        {
-            return \Illuminate\Database\Eloquent\Builder::ddSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function listenedSql(string $target): \Illuminate\Database\Eloquent\Builder
-        {
-            return \Illuminate\Database\Eloquent\Builder::listenedSql($target);
-        }
-
-        /**
-         * @return void
-         */
-        public function logListenedSql(): \Illuminate\Database\Eloquent\Builder
-        {
-            return \Illuminate\Database\Eloquent\Builder::logListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function dumpListenedSql(): \Illuminate\Database\Eloquent\Builder
-        {
-            return \Illuminate\Database\Eloquent\Builder::dumpListenedSql();
-        }
-
-        /**
-         * @return void
-         */
-        public function ddListenedSql(): \Illuminate\Database\Eloquent\Builder
-        {
-            return \Illuminate\Database\Eloquent\Builder::ddListenedSql();
-        }
     }
 }
