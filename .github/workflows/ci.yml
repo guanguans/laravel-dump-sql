@@ -7,16 +7,6 @@ on:
     branches: [ master ]
 
 jobs:
-  phpcs:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup PHP environment
-      uses: shivammathur/setup-php@v2
-    - name: Install dependencies
-      run: composer install
-    - name: PHPCSFixer check
-      run: composer check-style
   phpunit:
     strategy:
       matrix:
