@@ -7,7 +7,7 @@
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![License](https://poser.pugx.org/guanguans/laravel-dump-sql/license)](//packagist.org/packages/guanguans/laravel-dump-sql)
 
-> Easy output of complete SQL statements in laravel framework. - 在 laravel 中轻松容易的输出完整的 sql 语句。
+> Assist laravel application to obtain complete sql statement. - 辅助 laravel 应用获取完整的 sql 语句。
 
 > The sql statement obtained by the query construction method in laravel is not bound to the conditional parameters, similar to `select * from users where id= ?`. This expansion pack can help you get a complete sql statement. - laravel 中查询构造方法得到的 sql 语句没有绑定条件参数，类似于`select * from users where id= ?`。这个扩展包可辅助你获取完整的 sql 语句。
 
