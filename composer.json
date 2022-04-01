@@ -1,5 +1,8 @@
 {
     "name": "guanguans/laravel-dump-sql",
+    "description": "laravel 中轻松容易的输出完整的 SQL 语句。 - Easy output of complete SQL statements for laravel framework.",
+    "license": "MIT",
+    "type": "laravel",
     "keywords": [
         "sql",
         "mysql",
@@ -8,39 +11,33 @@
         "debug",
         "laravel"
     ],
-    "description": "laravel 中轻松容易的输出完整的 SQL 语句。 - Easy output of complete SQL statements for laravel framework.",
-    "support": {
-        "issues": "https://github.com/guanguans/laravel-dump-sql/issues",
-        "source": "https://github.com/guanguans/laravel-dump-sql"
-    },
-    "type": "laravel",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "config": {
-        "sort-packages": true
-    },
     "authors": [
         {
             "name": "guanguans",
             "email": "ityaozm@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/guanguans/laravel-dump-sql/issues",
+        "source": "https://github.com/guanguans/laravel-dump-sql"
+    },
     "require": {
         "php": ">=7.2",
-        "illuminate/console": "^5.6 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/database": "^5.6 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/http": "^5.6 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/log": "^5.6 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "illuminate/support": "^5.6 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-        "symfony/var-dumper": "^4.1 || ^5.0 || ^6.0"
+        "illuminate/console": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/database": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/http": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/log": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+        "symfony/var-dumper": "^4.3 || ^5.0 || ^6.0"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.7",
         "friendsofphp/php-cs-fixer": "^2.16",
         "mockery/mockery": "^1.2",
-        "orchestra/testbench": "^3.3|^4.0|^5.0|^6.0",
+        "orchestra/testbench": "^3.3 || ^4.0 || ^5.0 || ^6.0",
         "phpunit/phpunit": "^8.0"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Guanguans\\LaravelDumpSql\\": "src"
@@ -54,12 +51,10 @@
             "Guanguans\\LaravelDumpSqlTests\\": "tests"
         }
     },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
-        "laravel": {
-            "providers": [
-                "Guanguans\\LaravelDumpSql\\ServiceProvider"
-            ]
-        },
         "hooks": {
             "pre-commit": [
                 "composer test",
@@ -69,20 +64,25 @@
                 "composer test",
                 "composer check-style"
             ]
+        },
+        "laravel": {
+            "providers": [
+                "Guanguans\\LaravelDumpSql\\ServiceProvider"
+            ]
         }
     },
     "scripts": {
-        "post-update-cmd": [
-            "cghooks update"
-        ],
-        "post-merge": "composer install",
         "post-install-cmd": [
             "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "post-update-cmd": [
             "cghooks update"
         ],
         "cghooks": "vendor/bin/cghooks",
         "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi",
         "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
+        "post-merge": "composer install",
         "test": "vendor/bin/phpunit --coverage-text --colors=always --verbose"
     }
 }
