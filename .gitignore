@@ -7,3 +7,4 @@ composer.lock
 tests.php
 .DS_Store
 /build/
+.php-cs-fixer.cache
