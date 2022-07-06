@@ -20,7 +20,7 @@
 
 ## 环境要求
 
-* laravel || lumen >= 5.5
+* laravel || lumen >= 6.10
 
 ## 安装
 
