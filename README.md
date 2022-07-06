@@ -2,7 +2,9 @@
 
 ![](docs/dump-server.gif)
 
-[![ci](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml/badge.svg)](https://github.com/guanguans/laravel-dump-sql/actions/workflows/ci.yml)
+[![tests](https://github.com/guanguans/laravel-dump-sql/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-dump-sql/actions)
+[![check & fix styling](https://github.com/guanguans/laravel-dump-sql/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-dump-sql/actions)
+[![codecov](https://codecov.io/gh/guanguans/laravel-dump-sql/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/laravel-dump-sql)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-dump-sql/v)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-dump-sql/downloads)](//packagist.org/packages/guanguans/laravel-dump-sql)
 [![License](https://poser.pugx.org/guanguans/laravel-dump-sql/license)](//packagist.org/packages/guanguans/laravel-dump-sql)

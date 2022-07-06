@@ -6,3 +6,4 @@ composer.lock
 .phpunit.result.cache
 tests.php
 .DS_Store
+/build/

@@ -32,7 +32,8 @@
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.7",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "laravel/legacy-factories": "^1.0",
         "mockery/mockery": "^1.2",
         "orchestra/testbench": "^3.3 || ^4.0 || ^5.0 || ^6.0",
         "phpunit/phpunit": "^8.0"
@@ -58,11 +59,11 @@
         "hooks": {
             "pre-commit": [
                 "composer test",
-                "composer check-style"
+                "composer style-lint"
             ],
             "pre-push": [
                 "composer test",
-                "composer check-style"
+                "composer style-lint"
             ]
         },
         "laravel": {
@@ -80,9 +81,9 @@
             "cghooks update"
         ],
         "cghooks": "vendor/bin/cghooks",
-        "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi",
-        "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
-        "post-merge": "composer install",
-        "test": "vendor/bin/phpunit --coverage-text --colors=always --verbose"
+        "style-fix": "./vendor/bin/php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.php --ansi",
+        "style-lint": "./vendor/bin/php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.php --diff --dry-run --ansi",
+        "test": "./vendor/bin/phpunit --coverage-text --colors=always --cache-result-file=./build/.phpunit.result.cache --verbose",
+        "test-coverage": "./vendor/bin/phpunit --coverage-html=./build/coverage/ --coverage-clover=./build/clover.xml --color=always --cache-result-file=./build/.phpunit.result.cache --verbose"
     }
 }
