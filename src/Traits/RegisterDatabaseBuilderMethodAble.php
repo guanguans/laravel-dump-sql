@@ -10,25 +10,23 @@
 
 namespace Guanguans\LaravelDumpSql\Traits;
 
-use Closure;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
-use InvalidArgumentException;
 
 trait RegisterDatabaseBuilderMethodAble
 {
     /**
      * @throws \InvalidArgumentException|\ReflectionException
      */
-    public function registerDatabaseBuilderMethod(string $methodName, Closure $closure)
+    public function registerDatabaseBuilderMethod(string $methodName, \Closure $closure)
     {
         if (
             method_exists(QueryBuilder::class, $methodName) ||
             method_exists(EloquentBuilder::class, $methodName) ||
             method_exists(Relation::class, $methodName)
         ) {
-            throw new InvalidArgumentException(sprintf('`%s` or `%s` or `%s` already exists method.:%s', QueryBuilder::class, EloquentBuilder::class, Relation::class, $methodName));
+            throw new \InvalidArgumentException(sprintf('`%s` or `%s` or `%s` already exists method.:%s', QueryBuilder::class, EloquentBuilder::class, Relation::class, $methodName));
         }
 
         $parameters = array_keys(

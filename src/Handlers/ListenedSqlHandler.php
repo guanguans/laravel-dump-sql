@@ -15,7 +15,6 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use InvalidArgumentException;
 
 class ListenedSqlHandler
 {
@@ -39,7 +38,7 @@ class ListenedSqlHandler
     public function __invoke(string $target): void
     {
         if (! in_array($target, ['log', 'dump', 'dd'])) {
-            throw new InvalidArgumentException('Invalid target argument.');
+            throw new \InvalidArgumentException('Invalid target argument.');
         }
 
         DB::listen(function (QueryExecuted $queryExecutedEvent) use ($target) {
@@ -108,8 +107,6 @@ class ListenedSqlHandler
     }
 
     /**
-     * @param $milliseconds
-     *
      * @return string
      */
     protected function formatQueryExecutedTime($milliseconds)

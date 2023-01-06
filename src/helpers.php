@@ -28,8 +28,6 @@ if (! function_exists('array_reduces')) {
 
 if (! function_exists('enable_listen_sql')) {
     /**
-     * @param $target
-     *
      * @return mixed
      */
     function enable_listen_sql($target)
