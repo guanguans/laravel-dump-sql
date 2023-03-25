@@ -2,6 +2,19 @@
 
 All notable changes to `guanguans/laravel-dump-sql` will be documented in this file.
 
+## v2.3.0 - 2023-03-25
+
+### What's Changed
+
+- Bump actions/stale from 5 to 6 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/14
+- Bump dependabot/fetch-metadata from 1.3.3 to 1.3.4 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/15
+- Bump dependabot/fetch-metadata from 1.3.4 to 1.3.5 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/16
+- Bump actions/stale from 6 to 7 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/17
+- Bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/18
+- Bump actions/stale from 7 to 8 by @dependabot in https://github.com/guanguans/laravel-dump-sql/pull/20
+
+**Full Changelog**: https://github.com/guanguans/laravel-dump-sql/compare/v2.2.1...v2.3.0
+
 ## v2.2.1 - 2022-07-06
 
 ### What's Changed
