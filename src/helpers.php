@@ -27,9 +27,6 @@ if (! function_exists('array_reduces')) {
 }
 
 if (! function_exists('enable_listen_sql')) {
-    /**
-     * @return mixed
-     */
     function enable_listen_sql($target)
     {
         return call_user_func(
@@ -42,9 +39,6 @@ if (! function_exists('enable_listen_sql')) {
 }
 
 if (! function_exists('enable_log_listened_sql')) {
-    /**
-     * @return mixed
-     */
     function enable_log_listened_sql()
     {
         return enable_listen_sql('log');
@@ -52,9 +46,6 @@ if (! function_exists('enable_log_listened_sql')) {
 }
 
 if (! function_exists('enable_dump_listened_sql')) {
-    /**
-     * @return mixed
-     */
     function enable_dump_listened_sql()
     {
         return enable_listen_sql('dump');
@@ -62,9 +53,6 @@ if (! function_exists('enable_dump_listened_sql')) {
 }
 
 if (! function_exists('enable_dd_listened_sql')) {
-    /**
-     * @return mixed
-     */
     function enable_dd_listened_sql()
     {
         return enable_listen_sql('dd');

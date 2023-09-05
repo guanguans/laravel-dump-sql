@@ -22,9 +22,9 @@ trait RegisterDatabaseBuilderMethodAble
     public function registerDatabaseBuilderMethod(string $methodName, \Closure $closure)
     {
         if (
-            method_exists(QueryBuilder::class, $methodName) ||
-            method_exists(EloquentBuilder::class, $methodName) ||
-            method_exists(Relation::class, $methodName)
+            method_exists(QueryBuilder::class, $methodName)
+            || method_exists(EloquentBuilder::class, $methodName)
+            || method_exists(Relation::class, $methodName)
         ) {
             throw new \InvalidArgumentException(sprintf('`%s` or `%s` or `%s` already exists method.:%s', QueryBuilder::class, EloquentBuilder::class, Relation::class, $methodName));
         }
