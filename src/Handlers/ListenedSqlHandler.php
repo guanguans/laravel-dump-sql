@@ -26,7 +26,7 @@ class ListenedSqlHandler
     protected $enabled = false;
 
     /**
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $app;
 

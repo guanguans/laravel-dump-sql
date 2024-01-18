@@ -29,7 +29,7 @@ class RequestContextProvider implements ContextProviderInterface
     /**
      * The variable cloner.
      *
-     * @var \Symfony\Component\VarDumper\Cloner\VarCloner
+     * @var VarCloner
      */
     private $cloner;
 

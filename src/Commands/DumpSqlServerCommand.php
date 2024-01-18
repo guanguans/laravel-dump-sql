@@ -39,7 +39,7 @@ class DumpSqlServerCommand extends Command
     /**
      * The Dump server.
      *
-     * @var \Symfony\Component\VarDumper\Server\DumpServer
+     * @var DumpServer
      */
     protected $server;
 

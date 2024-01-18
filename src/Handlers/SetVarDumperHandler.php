@@ -23,7 +23,7 @@ class SetVarDumperHandler
     public const CONNECTION_FLAG = 'laravel-dump-sql';
 
     /**
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $app;
 
