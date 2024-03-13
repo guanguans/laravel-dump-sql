@@ -9,7 +9,7 @@
  */
 
 namespace {
-    class DB extends \Illuminate\Support\Facades\DB
+    class DB extends Illuminate\Support\Facades\DB
     {
     }
 }
@@ -25,7 +25,7 @@ namespace Illuminate\Database\Query {
      * @method $this  ddListenedSql()
      *
      * @see \Guanguans\LaravelDumpSql\ServiceProvider
-     * @see \Illuminate\Database\Query\Builder
+     * @see Builder
      */
     class Builder
     {
@@ -45,7 +45,7 @@ namespace Illuminate\Database\Eloquent {
      * @mixin \Illuminate\Database\Query\Builder
      *
      * @see \Guanguans\LaravelDumpSql\ServiceProvider
-     * @see \Illuminate\Database\Eloquent\Builder
+     * @see Builder
      */
     class Builder
     {
@@ -65,7 +65,7 @@ namespace Illuminate\Database\Eloquent\Relations {
      * @mixin \Illuminate\Database\Eloquent\Builder
      *
      * @see \Guanguans\LaravelDumpSql\ServiceProvider
-     * @see \Illuminate\Database\Eloquent\Relations\Relation
+     * @see Relation
      */
     class Relation
     {
