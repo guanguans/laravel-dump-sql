@@ -22,7 +22,7 @@ class RequestContextProvider implements ContextProviderInterface
     /**
      * The current request.
      *
-     * @var \Illuminate\Http\Request|null
+     * @var Request|null
      */
     private $currentRequest;
 
@@ -38,7 +38,7 @@ class RequestContextProvider implements ContextProviderInterface
      *
      * @return void
      */
-    public function __construct(Request $currentRequest = null)
+    public function __construct(?Request $currentRequest = null)
     {
         $this->currentRequest = $currentRequest;
         $this->cloner = new VarCloner();

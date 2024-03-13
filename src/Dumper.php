@@ -22,7 +22,7 @@ class Dumper
     /**
      * The connection.
      *
-     * @var \Symfony\Component\VarDumper\Server\Connection|null
+     * @var Connection|null
      */
     private $connection;
 
@@ -31,7 +31,7 @@ class Dumper
      *
      * @return void
      */
-    public function __construct(Connection $connection = null)
+    public function __construct(?Connection $connection = null)
     {
         $this->connection = $connection;
     }
