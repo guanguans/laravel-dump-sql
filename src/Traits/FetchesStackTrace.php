@@ -20,7 +20,7 @@ trait FetchesStackTrace
     /**
      * Find the first frame in the stack trace outside of Laravel.
      *
-     * @param string|array $forgetLines
+     * @param array-key|array $forgetLines
      *
      * @return array|null
      */

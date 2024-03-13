@@ -12,6 +12,9 @@ namespace Guanguans\LaravelDumpSql\Macros;
 
 class QueryBuilderMacro
 {
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
     public function toRawSql()
     {
         return function () {
@@ -42,7 +45,7 @@ class QueryBuilderMacro
     {
         return function ($target) {
             /* @var \Illuminate\Database\Query\Builder $this */
-            return tap($this, function ($queryBuilder) use ($target) {
+            return tap($this, function () use ($target) {
                 enable_listen_sql($target);
             });
         };

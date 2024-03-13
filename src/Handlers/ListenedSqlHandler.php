@@ -65,7 +65,6 @@ class ListenedSqlHandler
                     break;
                 case 'dd':
                     dd($formatSql);
-                    break;
             }
         });
     }
@@ -123,6 +122,8 @@ class ListenedSqlHandler
     }
 
     /**
+     * @psalm-suppress InvalidArgument
+     *
      * @return string
      */
     protected function formatSqlInfo(array $sqlInfo)

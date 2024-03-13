@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-exception-notify.
+ * This file is part of the guanguans/laravel-dump-sql.
  *
  * (c) guanguans <ityaozm@gmail.com>
  *
@@ -27,7 +27,7 @@ return static function (MBConfig $mbConfig): void {
     require __DIR__.'/vendor/autoload.php';
     $mbConfig->defaultBranch('main');
 
-    /**
+    /*
      * release workers - in order to execute
      *
      * @see https://github.com/symplify/monorepo-builder#6-release-flow

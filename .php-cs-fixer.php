@@ -9,24 +9,28 @@
  */
 
 $header = <<<EOF
-This file is part of the guanguans/laravel-dump-sql.
+    This file is part of the guanguans/laravel-dump-sql.
 
-(c) guanguans <ityaozm@gmail.com>
+    (c) guanguans <ityaozm@gmail.com>
 
-This source file is subject to the MIT license that is bundled.
-EOF;
+    This source file is subject to the MIT license that is bundled.
+    EOF;
 
 $finder = PhpCsFixer\Finder::create()
     ->in([
-        __DIR__ . '/config',
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
+        __DIR__.'/config',
+        __DIR__.'/src',
+        __DIR__.'/tests',
     ])
     ->exclude([
         '.github/',
         'doc/',
         'docs/',
         'vendor/',
+    ])
+    ->append(glob(__DIR__.'/{*,.*}.php', GLOB_BRACE))
+    ->append([
+        __DIR__.'/composer-updater',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
@@ -36,11 +40,25 @@ $finder = PhpCsFixer\Finder::create()
 
 return (new PhpCsFixer\Config())
     ->setRules([
-        // '@PSR12' => true,
+        '@PHP70Migration' => true,
+        // '@PHP70Migration:risky' => true,
+        '@PHP71Migration' => true,
+        // '@PHP71Migration:risky' => true,
+        '@PHP73Migration' => true,
+        // '@PHP74Migration' => true,
+        // '@PHP74Migration:risky' => true,
+        // '@PHP80Migration' => true,
+        // '@PHP80Migration:risky' => true,
+        // '@PHP81Migration' => true,
+        // '@PHP82Migration' => true,
+
+        // '@PHPUnit75Migration:risky' => true,
+        // '@PHPUnit84Migration:risky' => true,
+        // '@PHPUnit100Migration:risky' => true,
         '@Symfony' => true,
         'header_comment' => [
             'header' => $header,
-            'comment_type' => 'PHPDoc'
+            'comment_type' => 'PHPDoc',
         ],
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
@@ -56,5 +74,5 @@ return (new PhpCsFixer\Config())
         // 'php_unit_strict' => true,
         // 'declare_strict_types' => true,
     ])
-    // ->setRiskyAllowed(true)
+    ->setRiskyAllowed(false)
     ->setFinder($finder);

@@ -45,6 +45,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
+     * @psalm-suppress UndefinedClass
+     * @psalm-suppress UndefinedInterfaceMethod
      * Setup the config.
      */
     protected function setupConfig()
