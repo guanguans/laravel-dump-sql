@@ -96,6 +96,7 @@
         "checks": [
             "@composer-normalize",
             "@composer-validate",
+            "@md-lint",
             "@lint",
             "@style-lint",
             "@test",
