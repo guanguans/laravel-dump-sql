@@ -23,11 +23,11 @@
     },
     "require": {
         "php": ">=7.3",
-        "illuminate/console": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-        "illuminate/database": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-        "illuminate/http": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-        "illuminate/log": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-        "illuminate/support": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+        "illuminate/console": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "illuminate/database": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "illuminate/http": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "illuminate/log": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
         "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0"
     },
     "require-dev": {
@@ -38,7 +38,7 @@
         "guanguans/monorepo-builder-worker": "^1.4",
         "laravel/legacy-factories": "^1.4",
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^3.3 || ^4.0 || ^5.0 || ^6.0",
+        "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
         "phpunit/phpunit": "^9.6 || ^10.0 || ^11.0",
         "rector/rector": "^1.0",
         "vimeo/psalm": "^4.30 || ^5.0"
@@ -111,7 +111,7 @@
         "composer-require-checker": "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v",
         "composer-unused": "@php ./vendor/bin/composer-unused --ansi -v",
         "composer-unused-checker": "@php ./vendor/bin/composer-unused --ansi -v",
-        "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --except-packages=guanguans/notify --except-packages=laravel/lumen-framework --except-packages=orchestra/testbench --except-packages=pestphp/pest-plugin-laravel --ansi",
+        "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --except-packages=laravel/lumen-framework --except-packages=orchestra/testbench --except-packages=pestphp/pest-plugin-laravel --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
         "facade-lint": "@facade-update --lint",
