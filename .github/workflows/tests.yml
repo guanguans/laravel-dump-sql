@@ -32,14 +32,15 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ansi -v
 
       - name: Execute tests
         run: composer test-c
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         with:
+          files: ./build/clover.xml
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          fail_ci_if_error: false # optional (default = false)
+          fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
