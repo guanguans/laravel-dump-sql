@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.5.0"></a>
+## [2.5.0] - 2024-03-14
+
 <a name="2.4.0"></a>
 ## [2.4.0] - 2024-03-13
 ### Pull Requests
@@ -132,7 +135,8 @@ All notable changes to this project will be documented in this file.
 - Merge pull request [#1](https://github.com/guanguans/laravel-dump-sql/issues/1) from guanguans/add-license-1
 
 
-[Unreleased]: https://github.com/guanguans/laravel-dump-sql/compare/2.4.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-dump-sql/compare/2.5.0...HEAD
+[2.5.0]: https://github.com/guanguans/laravel-dump-sql/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/guanguans/laravel-dump-sql/compare/v2.3.0...2.4.0
 [v2.3.0]: https://github.com/guanguans/laravel-dump-sql/compare/v2.2.1...v2.3.0
 [v2.2.1]: https://github.com/guanguans/laravel-dump-sql/compare/v2.2.0...v2.2.1
